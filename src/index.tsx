@@ -1,4 +1,8 @@
 import { NativeModules, Platform } from 'react-native';
+import {requireNativeComponent} from 'react-native';
+
+export const InsideAdViewManager =
+  requireNativeComponent('InsideAdViewManager');
 
 const LINKING_ERROR =
   `The package 'react-native-awesome-module' doesn't seem to be linked. Make sure: \n\n` +
