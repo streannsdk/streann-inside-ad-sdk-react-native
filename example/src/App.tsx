@@ -10,12 +10,19 @@ export default function App() {
     multiply(3, 7).then(setResult);
     const viewId = findNodeHandle(ref.current);
     createFragment(viewId);
+    console.log("HEEY MSG creating fragment" );
   }, []);
-
+  const reciveMsg = ({nativeEvent})=>{
+    console.log("HEEY MSG", nativeEvent);
+    
+  }
+  // https://github.com/gre/gl-react/blob/master/packages/gl-react-native/src/index.js
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
-      <InsideAdViewManager     style={{
+      <InsideAdViewManager  
+      onGLProgress={event => reciveMsg(event)}
+      style={{
         // converts dpi to px, provide desired height
         height: PixelRatio.getPixelSizeForLayoutSize(200),
         // converts dpi to px, provide desired width

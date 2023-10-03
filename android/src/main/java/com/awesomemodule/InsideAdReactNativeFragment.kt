@@ -6,20 +6,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContext
+import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.streann.insidead.callbacks.InsideAdCallback
 
-class InsideAdReactNativeFragment: Fragment() {
+class InsideAdReactNativeFragment(reactContext: ReactContext) : Fragment() {
     private val TAG = "InsideAdReactNative"
     private lateinit var insideAdView: InsideAdView;
-
+    private val reactContext1:ReactContext
+    init {
+      reactContext1 = reactContext;
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        insideAdView = InsideAdView(requireNotNull(context))
-        setupInsideAdView()
+          insideAdView = InsideAdView(requireNotNull(context))
+
         return insideAdView
     }
 
@@ -27,6 +34,8 @@ class InsideAdReactNativeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // do any logic that should happen in an `onCreate` method, e.g:
         // customView.onCreate(savedInstanceState);
+      onReceiveNativeEvent()
+      setupInsideAdView()
     }
 
     override fun onPause() {
@@ -50,7 +59,7 @@ class InsideAdReactNativeFragment: Fragment() {
     private fun setupInsideAdView() {
         insideAdView.requestAd("559ff7ade4b0d0aff40888dd", object : InsideAdCallback {
             override fun insideAdReceived() {
-                Log.i(TAG, "insideAdReceived: ")
+              Log.i(TAG, "insideAdReceived: ")
             }
 
             override fun insideAdBuffering() {
@@ -75,6 +84,7 @@ class InsideAdReactNativeFragment: Fragment() {
 
             override fun insideAdStop() {
                 Log.i(TAG, "insideAdStop: ")
+              onReceiveNativeEvent()
             }
 
             override fun insideAdError() {
@@ -90,4 +100,17 @@ class InsideAdReactNativeFragment: Fragment() {
             }
         })
     }
+  fun onReceiveNativeEvent() {
+    val event = Arguments.createMap().apply {
+      putString("message", "MyMessage")
+    }
+//    reactContext1
+//      .getJSModule(RCTEventEmitter::class.java)
+//      .receiveEvent(id, "topChange", event)
+    Log.i(TAG, "ovde probuva ")
+    reactContext1
+      .getJSModule(RCTEventEmitter::class.java)
+      .receiveEvent(id, "progress", event)
+  }
+
 }

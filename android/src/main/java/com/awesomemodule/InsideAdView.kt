@@ -5,6 +5,9 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.FrameLayout
+import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.ReactContext
+import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.streann.insidead.callbacks.CampaignCallback
 import com.streann.insidead.callbacks.InsideAdCallback
 import com.streann.insidead.models.InsideAd
@@ -65,5 +68,4 @@ class InsideAdView @JvmOverloads constructor(
         mGoogleImaPlayer?.visibility = VISIBLE
         mGoogleImaPlayer?.playAd(insideAd, insideAdCallback)
     }
-
 }

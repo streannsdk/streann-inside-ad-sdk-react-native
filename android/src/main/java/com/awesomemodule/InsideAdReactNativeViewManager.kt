@@ -7,9 +7,11 @@ import android.widget.FrameLayout
 import androidx.fragment.app.FragmentActivity
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactPropGroup
+
 
 class InsideAdReactNativeViewManager(
     private val reactContext: ReactApplicationContext
@@ -30,6 +32,20 @@ class InsideAdReactNativeViewManager(
      */
     //TODO requestAd
     override fun getCommandsMap() = mapOf("create" to COMMAND_CREATE)
+
+  override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
+    return MapBuilder.of(
+      "progress",
+      MapBuilder.of("registrationName", "onGLProgress")
+    );
+//    return mapOf(
+//      "topChange" to mapOf(
+//        "phasedRegistrationNames" to mapOf(
+//          "bubbled" to "onChange"
+//        )
+//      )
+//    )
+  }
 
     /**
      * Handle "create" command (called from JS) and call createFragment method
@@ -60,8 +76,7 @@ class InsideAdReactNativeViewManager(
         val parentView = root.findViewById<ViewGroup>(reactNativeViewId)
         setupLayout(parentView)
 
-        val myFragment = InsideAdReactNativeFragment()
-
+        val myFragment = InsideAdReactNativeFragment(reactContext)
         val activity = reactContext.currentActivity as FragmentActivity
         activity.supportFragmentManager
             .beginTransaction()
