@@ -1,12 +1,6 @@
 package com.awesomemodule
 
-import android.util.Log
-import androidx.lifecycle.ViewModelProvider
 import com.facebook.react.bridge.*
-import com.facebook.react.modules.core.DeviceEventManagerModule
-import com.streann.insidead.InsideAdReactNativeFragment
-import com.streann.insidead.InsideAdView
-import com.streann.insidead.callbacks.InsideAdCallback
 
 class AwesomeModuleModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {

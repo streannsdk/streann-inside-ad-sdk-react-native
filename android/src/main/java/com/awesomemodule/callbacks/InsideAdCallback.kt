@@ -1,4 +1,4 @@
-package com.streann.insidead.callbacks
+package com.awesomemodule.callbacks
 
 interface InsideAdCallback {
 

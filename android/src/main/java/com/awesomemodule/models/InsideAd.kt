@@ -1,4 +1,4 @@
-package com.streann.insidead.models
+package com.awesomemodule.models
 
 import org.json.JSONObject
 

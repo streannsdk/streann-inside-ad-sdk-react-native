@@ -1,6 +1,6 @@
-package com.streann.insidead.callbacks
+package com.awesomemodule.callbacks
 
-import com.streann.insidead.models.InsideAd
+import com.awesomemodule.models.InsideAd
 
 interface CampaignCallback {
     fun onSuccess(insideAd: InsideAd)

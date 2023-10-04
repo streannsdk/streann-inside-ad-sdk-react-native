@@ -1,4 +1,4 @@
-package com.streann.insidead
+package com.awesomemodule
 
 import android.content.Context
 import android.media.AudioManager
@@ -10,6 +10,8 @@ import android.widget.MediaController
 import android.widget.VideoView
 import com.awesomemodule.R
 import com.awesomemodule.VideoAdPlayerAdapter
+import com.awesomemodule.callbacks.InsideAdCallback
+import com.awesomemodule.models.InsideAd
 import com.google.ads.interactivemedia.v3.api.AdEvent.AdEventType
 import com.google.ads.interactivemedia.v3.api.AdsLoader
 import com.google.ads.interactivemedia.v3.api.AdsManager
@@ -17,8 +19,6 @@ import com.google.ads.interactivemedia.v3.api.ImaSdkFactory
 import com.google.ads.interactivemedia.v3.api.player.AdMediaInfo
 import com.google.ads.interactivemedia.v3.api.player.VideoAdPlayer
 import com.google.ads.interactivemedia.v3.api.player.VideoProgressUpdate
-import com.streann.insidead.callbacks.InsideAdCallback
-import com.streann.insidead.models.InsideAd
 
 class GoogleImaPlayer @JvmOverloads constructor(private val context: Context) :
     FrameLayout(context) {

@@ -1,4 +1,4 @@
-package com.streann.insidead
+package com.awesomemodule
 
 import android.os.Bundle
 import android.util.Log
@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.awesomemodule.callbacks.InsideAdCallback
 import com.facebook.react.bridge.Arguments
-import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
-import com.streann.insidead.callbacks.InsideAdCallback
 
 class InsideAdReactNativeFragment(reactContext: ReactContext) : Fragment() {
     private val TAG = "InsideAdReactNative"
@@ -25,7 +24,7 @@ class InsideAdReactNativeFragment(reactContext: ReactContext) : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-          insideAdView = InsideAdView(requireNotNull(context))
+        insideAdView = InsideAdView(requireNotNull(context))
 
         return insideAdView
     }

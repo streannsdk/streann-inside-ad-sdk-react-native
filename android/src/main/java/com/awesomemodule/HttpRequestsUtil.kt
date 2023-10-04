@@ -1,8 +1,8 @@
-package com.streann.insidead
+package com.awesomemodule
 
 import android.util.Log
-import com.streann.insidead.callbacks.CampaignCallback
-import com.streann.insidead.models.InsideAd
+import com.awesomemodule.callbacks.CampaignCallback
+import com.awesomemodule.models.InsideAd
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.BufferedReader
