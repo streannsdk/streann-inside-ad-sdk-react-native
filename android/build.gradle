@@ -51,7 +51,7 @@ def supportsNamespace() {
 
 android {
   if (supportsNamespace()) {
-    namespace "com.awesomemodule"
+    namespace "com.streann.insidead"
 
     sourceSets {
       main {

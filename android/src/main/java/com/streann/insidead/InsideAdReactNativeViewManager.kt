@@ -1,4 +1,4 @@
-package com.awesomemodule
+package com.streann.insidead
 
 import android.view.Choreographer
 import android.view.View

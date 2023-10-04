@@ -1,6 +1,7 @@
-package com.awesomemodule
+package com.streann.insidead
 
 import com.facebook.react.bridge.*
+import com.streann.insidead.InsideAdView
 
 class AwesomeModuleModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {

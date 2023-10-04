@@ -1,13 +1,13 @@
-package com.awesomemodule
+package com.streann.insidead
 
 import android.content.Context
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.FrameLayout
-import com.awesomemodule.callbacks.CampaignCallback
-import com.awesomemodule.callbacks.InsideAdCallback
-import com.awesomemodule.models.InsideAd
+import com.streann.insidead.callbacks.CampaignCallback
+import com.streann.insidead.callbacks.InsideAdCallback
+import com.streann.insidead.models.InsideAd
 import java.util.concurrent.Executors
 
 class InsideAdView @JvmOverloads constructor(

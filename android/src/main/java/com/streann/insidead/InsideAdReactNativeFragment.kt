@@ -1,4 +1,4 @@
-package com.awesomemodule
+package com.streann.insidead
 
 import android.os.Bundle
 import android.util.Log
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.awesomemodule.callbacks.InsideAdCallback
+import com.streann.insidead.callbacks.InsideAdCallback
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
