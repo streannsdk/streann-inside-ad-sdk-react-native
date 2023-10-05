@@ -1,21 +1,21 @@
-# react-native-awesome-module
+# streann-inside-ad-sdk-react-native
 
 react-native lib
 
 ## Installation
 
 ```sh
-npm install react-native-awesome-module
+npm install streann-inside-ad-sdk-react-native
 ```
 
 ## Usage
 
 ```js
-import { multiply } from 'react-native-awesome-module';
+import { initializeSdk, InsideAdViewManager } from 'streann-inside-ad-sdk-react-native';
 
 // ...
 
-const result = await multiply(3, 7);
+initializeSdk('appkey')
 ```
 
 ## Contributing

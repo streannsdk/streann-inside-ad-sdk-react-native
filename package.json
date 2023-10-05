@@ -1,7 +1,7 @@
 {
-  "name": "react-native-awesome-module",
+  "name": "streann-inside-ad-sdk-react-native",
   "version": "0.1.0",
-  "description": "react-native lib",
+  "description": "Streann inside ad sdk for react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",

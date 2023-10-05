@@ -1,14 +1,12 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text, UIManager, findNodeHandle, PixelRatio } from 'react-native';
-import { multiply, initializeSdk, InsideAdViewManager } from 'react-native-awesome-module';
+import { initializeSdk, InsideAdViewManager } from 'streann-inside-ad-sdk-react-native';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
   const ref = React.useRef(null);
   React.useEffect(() => {
     initializeSdk('')
-    multiply(3, 7).then(setResult);
     const viewId = findNodeHandle(ref.current);
     createFragment(viewId);
     console.log("HEEY MSG creating fragment" );
@@ -20,7 +18,7 @@ export default function App() {
   // https://github.com/gre/gl-react/blob/master/packages/gl-react-native/src/index.js
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+
       <InsideAdViewManager  
       onGLProgress={event => reciveMsg(event)}
       style={{
