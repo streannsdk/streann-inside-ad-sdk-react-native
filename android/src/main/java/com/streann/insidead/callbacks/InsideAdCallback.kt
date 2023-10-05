@@ -2,24 +2,24 @@ package com.streann.insidead.callbacks
 
 interface InsideAdCallback {
 
-    fun insideAdReceived()
+  fun insideAdReceived()
 
-    fun insideAdBuffering()
+  fun insideAdBuffering()
 
-    fun insideAdLoaded()
+  fun insideAdLoaded()
 
-    fun insideAdPlay()
+  fun insideAdPlay()
 
-    fun insideAdResume()
+  fun insideAdResume()
 
-    fun insideAdPause()
+  fun insideAdPause()
 
-    fun insideAdStop()
+  fun insideAdStop()
 
-    fun insideAdError()
+  fun insideAdError()
 
-    fun insideAdError(error: String)
+  fun insideAdError(error: String)
 
-    fun insideAdVolumeChanged(level: Float)
+  fun insideAdVolumeChanged(level: Float)
 
 }

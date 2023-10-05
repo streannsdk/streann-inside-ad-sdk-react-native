@@ -9,9 +9,9 @@ const LINKING_ERROR =
   Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
-console.log('NativeModules', NativeModules.InsideAdReactNative)
-const AwesomeModule = NativeModules.AwesomeModule
-  ? NativeModules.AwesomeModule
+console.log('NativeModules', NativeModules.InsideAdModule)
+const InsideAdModule = NativeModules.InsideAdModule
+  ? NativeModules.InsideAdModule
   : new Proxy(
       {},
       {
@@ -22,5 +22,9 @@ const AwesomeModule = NativeModules.AwesomeModule
     );
 
 export function multiply(a: number, b: number): Promise<number> {
-  return AwesomeModule.multiply(a, b);
+  return InsideAdModule.multiply(a, b);
+}
+
+export function initializeSdk(apiKey: string){
+  InsideAdModule.initializeSdk(apiKey);
 }

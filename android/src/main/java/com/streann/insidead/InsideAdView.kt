@@ -1,68 +1,118 @@
 package com.streann.insidead
 
+import android.app.Application
 import android.content.Context
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.FrameLayout
+import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.streann.insidead.callbacks.CampaignCallback
 import com.streann.insidead.callbacks.InsideAdCallback
+import com.streann.insidead.models.GeoIp
 import com.streann.insidead.models.InsideAd
+import com.streann.insidead.utils.Helper
+import com.streann.insidead.utils.HttpRequestsUtil
+import com.streann.insidead.utils.SharedPreferencesHelper
+import com.streann.insidead.utils.constants.SharedPrefKeys
 import java.util.concurrent.Executors
 
 class InsideAdView @JvmOverloads constructor(
-    private val context: Context,
-    attrs: AttributeSet? = null,
-    defStyle: Int = 0
+  context: Context,
+  attrs: AttributeSet? = null,
+  defStyle: Int = 0
 ) : FrameLayout(context, attrs, defStyle) {
-    private val LOGTAG = "InsideAdStreann"
-    private var mGoogleImaPlayer: GoogleImaPlayer? = null
-    private val executor = Executors.newSingleThreadExecutor()
 
-    init {
-        init()
-    }
+  private val LOGTAG = "InsideAdStreann"
+  private var mGoogleImaPlayer: GoogleImaPlayer? = null
+  private val executor = Executors.newSingleThreadExecutor()
+  private var apiKey: String = ""
+  private var scale: Float = 0f
 
-    private fun init() {
-        mGoogleImaPlayer = GoogleImaPlayer(context)
-        addView(mGoogleImaPlayer)
-    }
+  init {
+    init()
+  }
 
-    fun requestAd(resellerId: String, insideAdCallback: InsideAdCallback?) {
-        if (TextUtils.isEmpty(resellerId)) {
-            insideAdCallback?.insideAdError("ID is required.")
-            return
+  private fun init() {
+    mGoogleImaPlayer = GoogleImaPlayer(context)
+    addView(mGoogleImaPlayer)
+
+    scale = resources.displayMetrics.density
+    populateSdkInfo(context)
+  }
+
+  private fun populateSdkInfo(context: Context?) {
+    apiKey = InsideAdSdk.apiKey
+
+    context?.let {
+      InsideAdSdk.bundleId = it.packageName
+      InsideAdSdk.appName = it.applicationInfo.loadLabel(it.packageManager).toString()
+      InsideAdSdk.appVersion =
+        Helper.getPackageVersionCode(it.packageManager, it.packageName).toString()
+
+      InsideAdSdk.appPreferences = it.getSharedPreferences(
+        SharedPrefKeys.PREF_APP_PREFERENCES,
+        Application.MODE_PRIVATE
+      )
+
+      executor.execute {
+        try {
+          val info = AdvertisingIdClient.getAdvertisingIdInfo(it)
+          SharedPreferencesHelper.putAdId(info.id)
+          SharedPreferencesHelper.putAdLimitTracking(info.isLimitAdTrackingEnabled)
+          InsideAdSdk.adId = SharedPreferencesHelper.getAdId()
+          InsideAdSdk.adLimitTracking = SharedPreferencesHelper.getAdLimitTracking()
+        } catch (e: Exception) {
+          SharedPreferencesHelper.putAdId("")
         }
 
-        executor.execute {
-            val geoIpJsonObject = HttpRequestsUtil.getGeoIp()
-            if (geoIpJsonObject != null) {
-                if (geoIpJsonObject.has("countryCode")) {
-                    var geoCountryCode = geoIpJsonObject.get("countryCode").toString()
-                    if (resellerId.isNotBlank() && geoCountryCode.isNotBlank()) {
-                        HttpRequestsUtil.getCampaign(
-                            resellerId,
-                            geoCountryCode,
-                            object : CampaignCallback {
-                                override fun onSuccess(insideAd: InsideAd) {
-                                    Log.d(LOGTAG, "onSuccess $insideAd")
-                                    insideAdCallback?.let { showAd(insideAd, it) }
-                                }
+        InsideAdSdk.playerWidth = (width / scale).toInt()
+        InsideAdSdk.playerHeight = (height / scale).toInt()
+      }
+    }
+  }
 
-                                override fun onError(error: String?) {
-                                    Log.d(LOGTAG, "onError $error")
-                                }
-                            })
-                    }
-                }
-            }
+  fun requestAd(screen: String, insideAdCallback: InsideAdCallback?) {
+    if (TextUtils.isEmpty(apiKey)) {
+      Log.e(LOGTAG, "Api Key is required. Please implement the initializeSdk method.")
+      insideAdCallback?.insideAdError("Api Key is required.")
+      return
+    }
+
+    executor.execute {
+      val geoIp = HttpRequestsUtil.getGeoIp()
+      if (geoIp != null) {
+        var geoCountryCode = geoIp.countryCode
+        if (apiKey.isNotBlank() && geoCountryCode?.isNotBlank() == true) {
+          HttpRequestsUtil.getCampaign(
+            apiKey,
+            geoCountryCode,
+            screen,
+            object : CampaignCallback {
+              override fun onSuccess(insideAd: InsideAd) {
+                Log.d(LOGTAG, "onSuccess $insideAd")
+                insideAdCallback?.let { showAd(insideAd, geoIp, it) }
+              }
+
+              override fun onError(error: String?) {
+                Log.d(LOGTAG, "onError $error")
+              }
+            })
         }
-
-        executor.shutdown()
+      }
     }
+  }
 
-    private fun showAd(insideAd: InsideAd, insideAdCallback: InsideAdCallback) {
-        mGoogleImaPlayer?.visibility = VISIBLE
-        mGoogleImaPlayer?.playAd(insideAd, insideAdCallback)
-    }
+  private fun showAd(
+    insideAd: InsideAd,
+    geoIp: GeoIp,
+    insideAdCallback: InsideAdCallback
+  ) {
+    mGoogleImaPlayer?.playAd(insideAd, geoIp, insideAdCallback)
+  }
+
+  fun shutdownInsideAdExecutor() {
+    executor.shutdown()
+  }
+
 }

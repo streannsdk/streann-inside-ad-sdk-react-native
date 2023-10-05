@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text, UIManager, findNodeHandle, PixelRatio } from 'react-native';
-import { multiply, InsideAdViewManager } from 'react-native-awesome-module';
+import { multiply, initializeSdk, InsideAdViewManager } from 'react-native-awesome-module';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
   const ref = React.useRef(null);
   React.useEffect(() => {
+    initializeSdk('')
     multiply(3, 7).then(setResult);
     const viewId = findNodeHandle(ref.current);
     createFragment(viewId);
