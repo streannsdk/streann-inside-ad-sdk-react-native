@@ -27,3 +27,6 @@ export function multiply(a: number, b: number): Promise<number> {
 export function initializeSdk(apiKey: string){
   InsideAdModule.initializeSdk(apiKey);
 }
+export interface IinsideAdEvent{
+  event: string;
+}

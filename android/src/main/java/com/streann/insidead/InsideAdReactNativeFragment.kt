@@ -10,6 +10,7 @@ import com.streann.insidead.callbacks.InsideAdCallback
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import com.streann.insidead.models.InsideAd
 
 class InsideAdReactNativeFragment(reactContext: ReactContext) : Fragment() {
     private val TAG = "InsideAdStreann"
@@ -57,10 +58,10 @@ class InsideAdReactNativeFragment(reactContext: ReactContext) : Fragment() {
 
     private fun setupInsideAdView() {
         insideAdView.requestAd("559ff7ade4b0d0aff40888dd", object : InsideAdCallback {
-            override fun insideAdReceived() {
-              Log.i(TAG, "insideAdReceived: ")
-              onReceiveNativeEvent("insideAdReceived")
-            }
+          override fun insideAdReceived(insideAd: InsideAd) {
+            Log.i(TAG, "insideAdReceived: $insideAd")
+            onReceiveNativeEvent("insideAdReceived: $insideAd")
+          }
 
             override fun insideAdBuffering() {
                 Log.i(TAG, "insideAdBuffering: ")
@@ -112,10 +113,6 @@ class InsideAdReactNativeFragment(reactContext: ReactContext) : Fragment() {
     val event = Arguments.createMap().apply {
       putString("event", eventName)
     }
-//    reactContext1
-//      .getJSModule(RCTEventEmitter::class.java)
-//      .receiveEvent(id, "topChange", event)
-    Log.i(TAG, "ovde probuva ")
     reactContext1
       .getJSModule(RCTEventEmitter::class.java)
       .receiveEvent(id, "progress", event)

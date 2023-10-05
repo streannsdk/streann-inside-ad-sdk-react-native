@@ -36,7 +36,7 @@ class InsideAdReactNativeViewManager(
   override fun getExportedCustomDirectEventTypeConstants(): Map<String, Any> {
     return MapBuilder.of(
       "progress",
-      MapBuilder.of("registrationName", "onGLProgress")
+      MapBuilder.of("registrationName", "adEvents")
     );
 //    return mapOf(
 //      "topChange" to mapOf(
