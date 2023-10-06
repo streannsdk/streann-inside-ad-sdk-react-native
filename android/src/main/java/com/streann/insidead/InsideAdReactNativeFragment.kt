@@ -57,16 +57,11 @@ class InsideAdReactNativeFragment(reactContext: ReactContext) : Fragment() {
     }
 
     private fun setupInsideAdView() {
-        insideAdView.requestAd("559ff7ade4b0d0aff40888dd", object : InsideAdCallback {
+        insideAdView.requestAd("", object : InsideAdCallback {
           override fun insideAdReceived(insideAd: InsideAd) {
             Log.i(TAG, "insideAdReceived: $insideAd")
             onReceiveNativeEvent("insideAdReceived: $insideAd")
           }
-
-            override fun insideAdBuffering() {
-                Log.i(TAG, "insideAdBuffering: ")
-              onReceiveNativeEvent("insideAdBuffering")
-            }
 
             override fun insideAdLoaded() {
                 Log.i(TAG, "insideAdLoaded: ")
@@ -78,25 +73,11 @@ class InsideAdReactNativeFragment(reactContext: ReactContext) : Fragment() {
               onReceiveNativeEvent("insideAdPlay")
             }
 
-            override fun insideAdResume() {
-                Log.i(TAG, "insideAdResume: ")
-              onReceiveNativeEvent("insideAdResume")
-            }
-
-            override fun insideAdPause() {
-                Log.i(TAG, "insideAdPause: ")
-              onReceiveNativeEvent("insideAdPause")
-            }
-
             override fun insideAdStop() {
                 Log.i(TAG, "insideAdStop: ")
                 onReceiveNativeEvent("insideAdStop")
             }
 
-            override fun insideAdError() {
-                Log.i(TAG, "insideAdError: ")
-              onReceiveNativeEvent("insideAdError")
-            }
 
             override fun insideAdError(error: String) {
                 Log.i(TAG, "insideAdError: $error")

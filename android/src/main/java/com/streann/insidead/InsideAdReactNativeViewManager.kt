@@ -1,5 +1,7 @@
 package com.streann.insidead
 
+import android.graphics.Color
+import android.util.Log
 import android.view.Choreographer
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,7 @@ import com.facebook.react.uimanager.annotations.ReactPropGroup
 class InsideAdReactNativeViewManager(
     private val reactContext: ReactApplicationContext
     ) : ViewGroupManager<FrameLayout>(){
-
+    private val TAG = "InsideAdStreann"
     override fun getName() = REACT_CLASS
     private var propWidth: Int? = null
     private var propHeight: Int? = null
@@ -65,6 +67,7 @@ class InsideAdReactNativeViewManager(
 
     @ReactPropGroup(names = ["width", "height"], customType = "Style")
     fun setStyle(view: FrameLayout, index: Int, value: Int) {
+      Log.d(TAG, "PROPS:" + value )
         if (index == 0) propWidth = value
         if (index == 1) propHeight = value
     }
@@ -102,6 +105,7 @@ class InsideAdReactNativeViewManager(
         val width = requireNotNull(propWidth)
         val height = requireNotNull(propHeight)
 
+//        view.setBackgroundColor(Color.parseColor("#00000000"))
         view.measure(
             View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
             View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY))

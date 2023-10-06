@@ -9,8 +9,7 @@ import android.widget.FrameLayout
 import com.google.android.gms.ads.identifier.AdvertisingIdClient
 import com.streann.insidead.callbacks.CampaignCallback
 import com.streann.insidead.callbacks.InsideAdCallback
-import com.streann.insidead.models.GeoIp
-import com.streann.insidead.models.InsideAd
+import com.streann.insidead.models.Campaign
 import com.streann.insidead.utils.Helper
 import com.streann.insidead.utils.HttpRequestsUtil
 import com.streann.insidead.utils.SharedPreferencesHelper
@@ -79,7 +78,7 @@ class InsideAdView @JvmOverloads constructor(
   fun requestAd(screen: String, insideAdCallback: InsideAdCallback?) {
     if (TextUtils.isEmpty(apiKey)) {
       Log.e(LOGTAG, "Api Key is required. Please implement the initializeSdk method.")
-      insideAdCallback?.insideAdError("Api Key is required.")
+      insideAdCallback?.insideAdError("Api Key is required. Please implement the initializeSdk method.")
       return
     }
 
@@ -94,33 +93,28 @@ class InsideAdView @JvmOverloads constructor(
             geoCountryCode,
             screen,
             object : CampaignCallback {
-              override fun onSuccess(insideAd: InsideAd) {
-                Log.i(LOGTAG, "onSuccess: $insideAd")
+              override fun onSuccess(campaign: Campaign) {
+                Log.i(LOGTAG, "onSuccess: $campaign")
                 insideAdCallback?.let {
-                  it.insideAdReceived(insideAd)
-                  showAd(insideAd, geoIp, it)
+                  val insideAd = campaign.insideAd
+                  insideAd?.let { ad ->
+                    it.insideAdReceived(ad)
+                    mGoogleImaPlayer?.playAd(ad, geoIp, it)
+                  }
                 }
               }
 
               override fun onError(error: String?) {
-                Log.i(LOGTAG, "onError $error")
-                error?.let {
-                  insideAdCallback?.insideAdError(it)
-                } ?: kotlin.run { insideAdCallback?.insideAdError() }
+                var errorMsg = "Error while getting AD."
+                if (!error.isNullOrBlank()) errorMsg = error
+                Log.i(LOGTAG, "onError: $errorMsg")
+                insideAdCallback?.insideAdError(errorMsg)
               }
             })
         }
       }
     }
     requestAdExecutor!!.shutdown()
-  }
-
-  private fun showAd(
-    insideAd: InsideAd,
-    geoIp: GeoIp,
-    insideAdCallback: InsideAdCallback
-  ) {
-    mGoogleImaPlayer?.playAd(insideAd, geoIp, insideAdCallback)
   }
 
 }

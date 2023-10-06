@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.MediaController
 import android.widget.VideoView
 import com.google.ads.interactivemedia.v3.api.AdEvent.AdEventType
 import com.google.ads.interactivemedia.v3.api.AdsLoader
@@ -49,13 +48,14 @@ class GoogleImaPlayer @JvmOverloads constructor(context: Context) :
       videoAdPlayerAdapter = VideoAdPlayerAdapter(videoPlayer!!, audioManager)
     }
 
-    sdkFactory = ImaSdkFactory.getInstance()
+    setImaAdsCallback()
 
     val adDisplayContainer = ImaSdkFactory.createAdDisplayContainer(
       videoPlayerContainer,
       videoAdPlayerAdapter!!
     )
 
+    sdkFactory = ImaSdkFactory.getInstance()
     val settings = sdkFactory!!.createImaSdkSettings()
     adsLoader = sdkFactory!!.createAdsLoader(context, settings, adDisplayContainer)
 
@@ -115,7 +115,6 @@ class GoogleImaPlayer @JvmOverloads constructor(context: Context) :
       }
 
       override fun onBuffering(p0: AdMediaInfo) {
-        insideAdListener?.insideAdBuffering()
       }
 
       override fun onContentComplete() {
@@ -126,7 +125,7 @@ class GoogleImaPlayer @JvmOverloads constructor(context: Context) :
       }
 
       override fun onError(p0: AdMediaInfo) {
-        insideAdListener?.insideAdError()
+        insideAdListener?.insideAdError("Error while playing AD.")
       }
 
       override fun onLoaded(p0: AdMediaInfo) {
@@ -134,7 +133,6 @@ class GoogleImaPlayer @JvmOverloads constructor(context: Context) :
       }
 
       override fun onPause(p0: AdMediaInfo) {
-        insideAdListener?.insideAdPause()
       }
 
       override fun onPlay(p0: AdMediaInfo) {
@@ -142,7 +140,6 @@ class GoogleImaPlayer @JvmOverloads constructor(context: Context) :
       }
 
       override fun onResume(p0: AdMediaInfo) {
-        insideAdListener?.insideAdResume()
       }
 
       override fun onVolumeChanged(p0: AdMediaInfo, p1: Int) {
@@ -153,7 +150,6 @@ class GoogleImaPlayer @JvmOverloads constructor(context: Context) :
 
   fun playAd(insideAd: InsideAd, geoIp: GeoIp, listener: InsideAdCallback) {
     insideAdListener = listener
-    setImaAdsCallback()
     val url = InsideAdHelper.populateVASTURL(context, insideAd, geoIp)
     url?.let { requestAds(it) }
   }
