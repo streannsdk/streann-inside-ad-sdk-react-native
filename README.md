@@ -11,16 +11,22 @@ npm install streann-inside-ad-sdk-react-native
 ## Usage
 
 ```js
-import { initializeSdk, InsideAdViewManager } from 'streann-inside-ad-sdk-react-native';
+import { initializeSdk, InsideAd } from 'streann-inside-ad-sdk-react-native';
 
 // ...
-
+// First we call initializeSdk method
 initializeSdk('appkey')
+
+// after that we can implement the component
+
+const adEvents = (events:any)=>{
+  // here we can recive the events from the ads 
+  // like insideAdLoaded or insideAdPlayed or insideAdError
+  console.log("adEvents", events);
+}
+<InsideAd insideAdEvents={adEvents}></InsideAd>
+
 ```
-
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
 ## License
 
