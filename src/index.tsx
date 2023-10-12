@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { PixelRatio, findNodeHandle } from 'react-native';
 import { Dimensions } from 'react-native';
 import { UIManager } from 'react-native';
 import { NativeModules, Platform } from 'react-native';
 import {requireNativeComponent} from 'react-native';
 
-export const InsideAdViewManager =
+export const InsideAdViewManager:any =
   requireNativeComponent('InsideAdViewManager');
 
 const LINKING_ERROR =
@@ -31,36 +31,46 @@ export interface IinsideAdEvent{
   event: string;
 }
 
-export const InsideAd = ({insideAdEvents}) =>{
+export const InsideAd = forwardRef(({insideAdEvents, insideAdWidth, insideAdHeight} : any, parRef) =>{
+
   const ref = React.useRef(null);
   React.useEffect(() => {
     const viewId = findNodeHandle(ref.current);
     createFragment(viewId);
   }, []);
-  const adEvents = ({nativeEvent}:any)=>{
-    console.log("adEvents", nativeEvent);
-    insideAdEvents(nativeEvent)
+
+  useImperativeHandle(parRef, () => ({
+    refreshAd(){
+      const viewId = findNodeHandle(ref.current);
+      createFragment(viewId)
+    }
+  }));
+
+  const adEvents = ({nativeEvent}:any)=>{ 
+    const event = nativeEvent.event.split(/:(.*)/s)
+    const eventName = event[0]
+    insideAdEvents({eventName:eventName,payload:event[1]})
   }
   const createFragment = (viewId: number | null) =>
   UIManager.dispatchViewManagerCommand(
     viewId,
     // we are calling the 'create' command
+    //@ts-ignore
     UIManager.InsideAdViewManager.Commands.create.toString(),
     [viewId],
   );
-  const dimensions = Dimensions.get('window');
-  const adHeight = Math.round(dimensions.width * 9 / 16);
-  const adWidth = dimensions.width;
+
   return(
     <InsideAdViewManager  
     adEvents={(event:any) => adEvents(event)}
     style={{       
       // converts dpi to px, provide desired height
-      height: PixelRatio.getPixelSizeForLayoutSize(adHeight),
-        // converts dpi to px, provide desired width
-     width: PixelRatio.getPixelSizeForLayoutSize(adWidth),}}
+      height: insideAdHeight,
+      // converts dpi to px, provide desired width
+      width: insideAdWidth,
+    }}
     ref={ref}
   />
   )
-}
+})
 

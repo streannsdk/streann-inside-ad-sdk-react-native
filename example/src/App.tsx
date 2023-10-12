@@ -1,19 +1,39 @@
 import * as React from 'react';
 
-import { StyleSheet, View } from 'react-native';
+import { Button, Dimensions, PixelRatio, StyleSheet, View } from 'react-native';
 import { initializeSdk, InsideAd } from 'streann-inside-ad-sdk-react-native';
 
 export default function App() {
+  const insideAdRef = React.useRef<{refreshAd:Function}>();
+
   React.useEffect(() => {
     initializeSdk('appkey')
   }, []);
-  const adEvents = (events:any)=>{
-    console.log("adEvents", events);
+  
+  const adEvents = (event:{eventName:string, payload:string | null})=>{
+    console.log("adEvents", event);
   }
-  // https://github.com/gre/gl-react/blob/master/packages/gl-react-native/src/index.js
+  const refreshAd = () => {
+    if(insideAdRef.current)
+    insideAdRef.current.refreshAd()
+  }
+  const dimensions = Dimensions.get('window');
+  const adHeight = Math.round(dimensions.width * 9 / 16);
+  const adWidth = dimensions.width;
   return (
     <View style={styles.container}>
-      <InsideAd insideAdEvents={adEvents}></InsideAd>
+      <InsideAd 
+        ref={insideAdRef} 
+        insideAdHeight={PixelRatio.getPixelSizeForLayoutSize(adHeight)}
+        insideAdWidth={PixelRatio.getPixelSizeForLayoutSize(adWidth)} 
+        insideAdEvents={adEvents}
+      />
+      <Button
+        onPress={()=> refreshAd()}
+        title="request new ad"
+        color="#841584"
+        accessibilityLabel="Learn more about this purple button"
+      />
     </View>
   );
 }
