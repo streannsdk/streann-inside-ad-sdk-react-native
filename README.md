@@ -14,18 +14,43 @@ npm install streann-inside-ad-sdk-react-native
 import { initializeSdk, InsideAd } from 'streann-inside-ad-sdk-react-native';
 
 // ...
-// First we call initializeSdk method
-initializeSdk('appkey')
+// First we call initializeSdk method before InsideAd component is rendered
+  React.useEffect(() => {
+    initializeSdk({apiKey:'apiKey'})
+  }, []);
 
 // after that we can implement the component
+const insideAdRef = React.useRef<{refreshAd:Function}>();
 
-const adEvents = (events:any)=>{
-  // here we can recive the events from the ads 
-  // like insideAdLoaded or insideAdPlayed or insideAdError
-  console.log("adEvents", events);
-}
-<InsideAd insideAdEvents={adEvents}></InsideAd>
+  const adEvents = (event:{eventName:string, payload:string | null})=>{
+      // here we can recive the events from the ads 
+      // like insideAdLoaded or insideAdPlayed or insideAdError
+    console.log("adEvents", event);
+  }
 
+  const refreshAd = () => {
+    if(insideAdRef.current)
+    insideAdRef.current.refreshAd()
+  }
+ const dimensions = Dimensions.get('window');
+  const adHeight = Math.round(dimensions.width * 9 / 16);
+  const adWidth = dimensions.width;
+  return (
+    <View style={styles.container}>
+      <InsideAd 
+        ref={insideAdRef} 
+        insideAdHeight={PixelRatio.getPixelSizeForLayoutSize(adHeight)}
+        insideAdWidth={PixelRatio.getPixelSizeForLayoutSize(adWidth)} 
+        insideAdEvents={adEvents}
+      />
+      <Button
+        onPress={()=> refreshAd()}
+        title="request new ad"
+        color="#841584"
+      />
+    </View>
+  )
+// ...
 ```
 
 ## License

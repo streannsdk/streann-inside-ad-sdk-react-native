@@ -19,7 +19,7 @@ class InsideAdModule(reactContext: ReactApplicationContext) :
   fun initializeSdk(apiKey: String){
     Log.i(LOGTAG, "initializeSdk: ")
     InsideAdSdk.initializeSdk(
-      "559ff7ade4b0d0aff40888dd", userGender = "Female"
+      apiKey,
     )
   }
 

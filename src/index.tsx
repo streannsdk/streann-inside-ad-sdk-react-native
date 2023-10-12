@@ -1,9 +1,8 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
-import { PixelRatio, findNodeHandle } from 'react-native';
-import { Dimensions } from 'react-native';
+import { findNodeHandle } from 'react-native';
 import { UIManager } from 'react-native';
 import { NativeModules, Platform } from 'react-native';
-import {requireNativeComponent} from 'react-native';
+import { requireNativeComponent } from 'react-native';
 
 export const InsideAdViewManager:any =
   requireNativeComponent('InsideAdViewManager');
@@ -23,11 +22,19 @@ const InsideAdModule = NativeModules.InsideAdModule
         },
       }
     );
-
-export function initializeSdk(apiKey: string){
+interface IinitializeSdk{
+  apiKey: string, 
+  appDomain?: string,
+  siteUrl?: string, 
+  storeUrl?: string, 
+  descriptionUrl?: string,
+  userBirthYear?: number, 
+  userGender?: string
+}
+export function initializeSdk({apiKey}: IinitializeSdk){
   InsideAdModule.initializeSdk(apiKey);
 }
-export interface IinsideAdEvent{
+export interface IinsideAdEventName{
   event: string;
 }
 
@@ -47,10 +54,12 @@ export const InsideAd = forwardRef(({insideAdEvents, insideAdWidth, insideAdHeig
   }));
 
   const adEvents = ({nativeEvent}:any)=>{ 
-    const event = nativeEvent.event.split(/:(.*)/s)
-    const eventName = event[0]
-    insideAdEvents({eventName:eventName,payload:event[1]})
+    const event = nativeEvent.event.split(/:(.*)/s) 
+    const eventName: string = event[0];
+    const payload: string = event[1]
+    insideAdEvents({eventName:eventName,payload:payload})
   }
+  
   const createFragment = (viewId: number | null) =>
   UIManager.dispatchViewManagerCommand(
     viewId,

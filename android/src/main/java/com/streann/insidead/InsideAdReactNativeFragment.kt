@@ -34,7 +34,6 @@ class InsideAdReactNativeFragment(reactContext: ReactContext) : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // do any logic that should happen in an `onCreate` method, e.g:
         // customView.onCreate(savedInstanceState);
-      onReceiveNativeEvent("ViewCreated")
       setupInsideAdView()
     }
 

@@ -7,7 +7,7 @@ export default function App() {
   const insideAdRef = React.useRef<{refreshAd:Function}>();
 
   React.useEffect(() => {
-    initializeSdk('appkey')
+    initializeSdk({apiKey:'559ff7ade4b0d0aff40888dd'})
   }, []);
   
   const adEvents = (event:{eventName:string, payload:string | null})=>{
@@ -32,7 +32,6 @@ export default function App() {
         onPress={()=> refreshAd()}
         title="request new ad"
         color="#841584"
-        accessibilityLabel="Learn more about this purple button"
       />
     </View>
   );
