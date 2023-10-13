@@ -22,7 +22,7 @@ import { initializeSdk, InsideAd } from 'streann-inside-ad-sdk-react-native';
 // after that we can implement the component
 const insideAdRef = React.useRef<{refreshAd:Function}>();
 
-  const adEvents = (event:{eventName:string, payload:string | null})=>{
+  const adEvents = (event:IinsideAdEvent) => {
       // here we can recive the events from the ads 
       // like insideAdLoaded or insideAdPlayed or insideAdError
     console.log("adEvents", event);
