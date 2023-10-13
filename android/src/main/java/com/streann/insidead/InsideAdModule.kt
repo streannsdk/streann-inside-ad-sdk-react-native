@@ -8,18 +8,24 @@ class InsideAdModule(reactContext: ReactApplicationContext) :
   private lateinit var insideAdView: InsideAdView;
   private val LOGTAG = "InsideAdStreann"
   private var context: ReactApplicationContext;
+
   init {
     context = reactContext;
   }
+
   override fun getName(): String {
     return NAME
   }
 
   @ReactMethod
-  fun initializeSdk(apiKey: String){
+  fun initializeSdk(
+    apiKey: String, appDomain: String? = "",
+    siteUrl: String? = "", storeUrl: String? = "", descriptionUrl: String? = "",
+    userBirthYear: Int? = 0, userGender: String? = ""
+  ) {
     Log.i(LOGTAG, "initializeSdk: ")
     InsideAdSdk.initializeSdk(
-      "559ff7ade4b0d0aff40888dd", userGender = "Female"
+      apiKey, appDomain, siteUrl, storeUrl, descriptionUrl, userBirthYear, userGender
     )
   }
 
