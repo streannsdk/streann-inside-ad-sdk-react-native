@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { Button, Dimensions, PixelRatio, StyleSheet, View } from 'react-native';
-import { initializeSdk, InsideAd } from 'streann-inside-ad-sdk-react-native';
+import { initializeSdk, InsideAd, type IinsideAdEvent } from 'streann-inside-ad-sdk-react-native';
 
 export default function App() {
   const insideAdRef = React.useRef<{refreshAd:Function}>();
@@ -10,8 +10,8 @@ export default function App() {
     initializeSdk({apiKey:'559ff7ade4b0d0aff40888dd'})
   }, []);
   
-  const adEvents = (event:{eventName:string, payload:string | null})=>{
-    console.log("adEvents", event);
+  const adEvents = (event:IinsideAdEvent)=>{
+    console.log("adEvents", event.eventName);
   }
   const refreshAd = () => {
     if(insideAdRef.current)

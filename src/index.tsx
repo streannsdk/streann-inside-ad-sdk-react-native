@@ -22,7 +22,7 @@ const InsideAdModule = NativeModules.InsideAdModule
         },
       }
     );
-interface IinitializeSdk{
+interface IinitializeSdkData{
   apiKey: string, 
   appDomain?: string,
   siteUrl?: string, 
@@ -31,14 +31,21 @@ interface IinitializeSdk{
   userBirthYear?: number, 
   userGender?: string
 }
-export function initializeSdk({apiKey}: IinitializeSdk){
-  InsideAdModule.initializeSdk(apiKey);
+export function initializeSdk({apiKey, appDomain = "", descriptionUrl = "", siteUrl = "", storeUrl = "", userBirthYear = 0, userGender = ""}: IinitializeSdkData){
+  InsideAdModule.initializeSdk(apiKey, appDomain, descriptionUrl, siteUrl, storeUrl, userBirthYear, userGender);
 }
-export interface IinsideAdEventName{
-  event: string;
+export interface IinsideAdEvent{
+  eventName: "insideAdReceived" | "insideAdLoaded" | "insideAdPlay" | "insideAdStop" | "insideAdError"
+  payload:string
 }
 
-export const InsideAd = forwardRef(({insideAdEvents, insideAdWidth, insideAdHeight} : any, parRef) =>{
+interface insideAdProps{
+  insideAdEvents: Function,
+  insideAdWidth: number,
+  insideAdHeight: number
+}
+
+export const InsideAd = forwardRef(({insideAdEvents, insideAdWidth, insideAdHeight} : insideAdProps, parRef) =>{
 
   const ref = React.useRef(null);
   React.useEffect(() => {
