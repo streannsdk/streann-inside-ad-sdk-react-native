@@ -1,6 +1,6 @@
 {
   "name": "streann-inside-ad-sdk-react-native",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Streann inside ad sdk for react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -40,13 +40,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://NikolaIrak@bitbucket.org/NikolaIrak/inside-ad-react-native.git",
-  "author": "Nikola Irakoski <nikola@streann.com> (https://bitbucket.org/NikolaIrak)",
+  "repository": "https://github.com/streannsdk/streann-inside-ad-sdk-react-native",
+  "author": "Streann <info@streann.com> (https://github.com/streannsdk)",
   "license": "MIT",
   "bugs": {
-    "url": "https://NikolaIrak@bitbucket.org/NikolaIrak/inside-ad-react-native.git/issues"
+    "url": "https://github.com/streannsdk/streann-inside-ad-sdk-react-native/issues"
   },
-  "homepage": "https://NikolaIrak@bitbucket.org/NikolaIrak/inside-ad-react-native.git#readme",
+  "homepage": "https://github.com/streannsdk/streann-inside-ad-sdk-react-native#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
