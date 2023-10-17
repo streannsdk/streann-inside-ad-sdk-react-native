@@ -25,6 +25,7 @@ const InsideAdModule = NativeModules.InsideAdModule
     );
 interface IinitializeSdkData {
   apiKey: string;
+  baseUrl: string;
   appDomain?: string;
   siteUrl?: string;
   storeUrl?: string;
@@ -34,6 +35,7 @@ interface IinitializeSdkData {
 }
 export function initializeSdk({
   apiKey,
+  baseUrl,
   appDomain = '',
   descriptionUrl = '',
   siteUrl = '',
@@ -43,6 +45,7 @@ export function initializeSdk({
 }: IinitializeSdkData) {
   InsideAdModule.initializeSdk(
     apiKey,
+    baseUrl,
     appDomain,
     descriptionUrl,
     siteUrl,

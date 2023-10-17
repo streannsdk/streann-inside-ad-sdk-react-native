@@ -19,13 +19,13 @@ class InsideAdModule(reactContext: ReactApplicationContext) :
 
   @ReactMethod
   fun initializeSdk(
-    apiKey: String, appDomain: String? = "",
+    apiKey: String, baseUrl: String, appDomain: String? = "",
     siteUrl: String? = "", storeUrl: String? = "", descriptionUrl: String? = "",
     userBirthYear: Int? = 0, userGender: String? = ""
   ) {
     Log.i(LOGTAG, "initializeSdk: ")
     InsideAdSdk.initializeSdk(
-      apiKey, appDomain, siteUrl, storeUrl, descriptionUrl, userBirthYear, userGender
+      apiKey, baseUrl, appDomain, siteUrl, storeUrl, descriptionUrl, userBirthYear, userGender
     )
   }
 

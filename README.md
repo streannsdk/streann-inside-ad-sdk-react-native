@@ -16,14 +16,15 @@ import { initializeSdk, InsideAd } from 'streann-inside-ad-sdk-react-native';
 // ...
 // First we call initializeSdk method before InsideAd component is rendered
   React.useEffect(() => {
-    initializeSdk({apiKey:'apiKey'})
+    // The apiKey and baseUrl will be provided.
+    initializeSdk({apiKey:'apiKey', baseUrl: 'https://....com/'})
   }, []);
 
 // after that we can implement the component
 const insideAdRef = React.useRef<{refreshAd:Function}>();
 
   const adEvents = (event:IinsideAdEvent) => {
-      // here we can recive the events from the ads 
+      // here we can receive the events from the ads
       // like insideAdLoaded or insideAdPlayed or insideAdError
     console.log("adEvents", event);
   }
@@ -37,6 +38,7 @@ const insideAdRef = React.useRef<{refreshAd:Function}>();
   const adWidth = dimensions.width;
   return (
     <View style={styles.container}>
+    // the insideAdHeight and insideAdWidth can be customized
       <InsideAd 
         ref={insideAdRef} 
         insideAdHeight={PixelRatio.getPixelSizeForLayoutSize(adHeight)}
@@ -52,11 +54,3 @@ const insideAdRef = React.useRef<{refreshAd:Function}>();
   )
 // ...
 ```
-
-## License
-
-MIT
-
----
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)

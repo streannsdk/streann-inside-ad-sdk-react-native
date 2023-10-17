@@ -1,6 +1,7 @@
 package com.streann.insidead.utils
 
 import android.util.Log
+import com.streann.insidead.InsideAdSdk
 import com.streann.insidead.callbacks.CampaignCallback
 import com.streann.insidead.models.Campaign
 import com.streann.insidead.models.GeoIp
@@ -19,11 +20,55 @@ import javax.net.ssl.HttpsURLConnection
 object HttpRequestsUtil {
   private val TAG = "InsideAdSdk"
 
-  fun getGeoIp(): GeoIp? {
+  fun getGeoIpUrl(): String? {
     var jsonObject: JSONObject? = null
 
     try {
-      val url = URL("https://geoip.streann.com/")
+      val url = URL(
+        InsideAdSdk.baseUrl + "v1/geo-ip-config"
+      )
+
+      val urlConnection = url.openConnection() as HttpURLConnection
+      urlConnection.requestMethod = "GET"
+      urlConnection.instanceFollowRedirects = true
+
+      val responseCode: Int = urlConnection.responseCode
+      if (responseCode == HttpURLConnection.HTTP_OK) {
+        try {
+          val inputStream =
+            BufferedReader(InputStreamReader(urlConnection.inputStream))
+          var inputLine: String?
+          val response = StringBuffer()
+
+          while (inputStream.readLine().also { inputLine = it } != null) {
+            response.append(inputLine)
+          }
+          inputStream.close()
+
+          jsonObject = JSONObject(response.toString())
+        } finally {
+          urlConnection.disconnect()
+        }
+      }
+    } catch (e: IOException) {
+      e.printStackTrace()
+    }
+
+    var geoIpUrl: String? = null
+    try {
+      geoIpUrl = jsonObject?.let { jsonObject.getString("geoIpUrl") }
+    } catch (e: JSONException) {
+      e.printStackTrace()
+    }
+
+    return geoIpUrl
+  }
+
+  fun getGeoIp(geoIpUrl: String): GeoIp? {
+    var jsonObject: JSONObject? = null
+
+    try {
+      val url = URL(geoIpUrl)
       val urlConnection = url.openConnection() as HttpURLConnection
       urlConnection.requestMethod = "GET"
       urlConnection.instanceFollowRedirects = true
@@ -136,8 +181,9 @@ object HttpRequestsUtil {
     try {
       val urlParameters = "platform=ANDROID&country=" + countryCode +
         "&r=" + apiKey + "&screen=" + screen
+
       url = URL(
-        "https://inside-ads.services.c1.streann.com/v1/campaigns/app"
+        InsideAdSdk.baseUrl + "v1/campaigns/app"
           + "?" + urlParameters
       )
 

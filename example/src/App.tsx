@@ -11,7 +11,7 @@ export default function App() {
   const insideAdRef = React.useRef<{ refreshAd: Function }>();
 
   React.useEffect(() => {
-    initializeSdk({ apiKey: '559ff7ade4b0d0aff40888dd' });
+    initializeSdk({ apiKey: 'ApiKey', baseUrl: 'BaseUrl' });
   }, []);
 
   const adEvents = (event: IinsideAdEvent) => {
