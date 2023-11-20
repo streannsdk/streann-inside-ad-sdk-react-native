@@ -14,6 +14,12 @@ export default function App() {
   React.useEffect(() => {
     const eventEmitter = new NativeEventEmitter(SDKEventEmitter);
     InsideAdSdk.initializeSdk("https://inside-ads.services.c1.streann.com", "559ff7ade4b0d0aff40888dd")
+    eventEmitter.addListener("StreannInsideAdSDK Log: Loaded", (event) => {
+      console.log("ANOTHER STRING ARRIVED");
+    });
+    eventEmitter.addListener("No Ads VAST response after one or more Wrappers", (event) => {
+      console.log("String ARRIVED");
+    });
     // const eventEmitter = new NativeEventEmitter(SDKEventEmitter);
   }, []);
 
