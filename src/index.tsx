@@ -4,9 +4,9 @@ import { UIManager } from 'react-native';
 import { NativeModules, Platform } from 'react-native';
 import { requireNativeComponent } from 'react-native';
 
-export const InsideAdViewManager: any = requireNativeComponent(
-  'InsideAdViewManager'
-);
+// export const InsideAdViewManager: any = requireNativeComponent(
+//   'InsideAdViewManager'
+// );
 
 const LINKING_ERROR =
   `The package 'InsideAdModule' doesn't seem to be linked. Make sure: \n\n` +
@@ -76,10 +76,10 @@ export const InsideAd = forwardRef(
     parRef
   ) => {
     const ref = React.useRef(null);
-    React.useEffect(() => {
-      const viewId = findNodeHandle(ref.current);
-      createFragment(viewId);
-    }, []);
+    // React.useEffect(() => {
+    //   const viewId = findNodeHandle(ref.current);
+    //   createFragment(viewId);
+    // }, []);
 
     useImperativeHandle(parRef, () => ({
       refreshAd() {
@@ -105,16 +105,21 @@ export const InsideAd = forwardRef(
       );
 
     return (
-      <InsideAdViewManager
-        adEvents={(event: any) => adEvents(event)}
-        style={{
-          // converts dpi to px, provide desired height
-          height: insideAdHeight,
-          // converts dpi to px, provide desired width
-          width: insideAdWidth,
-        }}
-        ref={ref}
-      />
+      <RNShareComp>
+
+      </RNShareComp>
+      // <InsideAdViewManager
+      //   adEvents={(event: any) => adEvents(event)}
+      //   style={{
+      //     // converts dpi to px, provide desired height
+      //     height: insideAdHeight,
+      //     // converts dpi to px, provide desired width
+      //     width: insideAdWidth,
+      //   }}
+      //   ref={ref}
+      // />
     );
   }
 );
+
+export const RNShareComp = requireNativeComponent('RNShare');

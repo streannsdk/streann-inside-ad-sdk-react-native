@@ -1,7 +1,8 @@
 import * as React from 'react';
-
-import { Button, Dimensions, PixelRatio, StyleSheet, View } from 'react-native';
+import {NativeEventEmitter, requireNativeComponent} from 'react-native';
+import { NativeModules, Button, Dimensions, PixelRatio, StyleSheet, View } from 'react-native';
 import {
+  RNShareComp,
   initializeSdk,
   InsideAd,
   type IinsideAdEvent,
@@ -9,9 +10,11 @@ import {
 
 export default function App() {
   const insideAdRef = React.useRef<{ refreshAd: Function }>();
-
+  const { RNShare, InsideAdSdk, SDKEventEmitter } = NativeModules;
   React.useEffect(() => {
-    initializeSdk({ apiKey: 'ApiKey', baseUrl: 'BaseUrl' });
+    const eventEmitter = new NativeEventEmitter(SDKEventEmitter);
+    InsideAdSdk.initializeSdk("https://inside-ads.services.c1.streann.com", "559ff7ade4b0d0aff40888dd")
+    // const eventEmitter = new NativeEventEmitter(SDKEventEmitter);
   }, []);
 
   const adEvents = (event: IinsideAdEvent) => {

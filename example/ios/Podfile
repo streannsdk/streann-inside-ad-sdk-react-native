@@ -26,6 +26,8 @@ if linkage != nil
 end
 
 target 'AwesomeModuleExample' do
+  pod 'GoogleAds-IMA-iOS-SDK', '~> 3.19.1'
+
   config = use_native_modules!
 
   # Flags change depending on the env values.

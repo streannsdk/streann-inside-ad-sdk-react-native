@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,20 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-AwesomeModuleExample-AwesomeModuleExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AwesomeModuleExample-AwesomeModuleExampleTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		919E79D02ADD419300265963 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79CF2ADD419300265963 /* ViewController.swift */; };
+		919E79D22ADD79B800265963 /* GeoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79D12ADD79B800265963 /* GeoModel.swift */; };
+		919E79D52ADD7B5600265963 /* CampaignAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79D42ADD7B5600265963 /* CampaignAppModel.swift */; };
+		919E79D82ADD7B9E00265963 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79D72ADD7B9E00265963 /* Protocols.swift */; };
+		919E79DE2ADD7BC600265963 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79DA2ADD7BC600265963 /* LocationManager.swift */; };
+		919E79DF2ADD7BC600265963 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79DB2ADD7BC600265963 /* Utils.swift */; };
+		919E79E02ADD7BC600265963 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79DC2ADD7BC600265963 /* Logger.swift */; };
+		919E79E12ADD7BC600265963 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79DD2ADD7BC600265963 /* Constants.swift */; };
+		919E79E52ADD7C2300265963 /* InsideAdHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79E32ADD7C2300265963 /* InsideAdHelper.swift */; };
+		919E79E62ADD7C2300265963 /* InsideAdPlayerInitialize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79E42ADD7C2300265963 /* InsideAdPlayerInitialize.swift */; };
+		919E79EB2ADD7C7400265963 /* InsideAdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79E82ADD7C7400265963 /* InsideAdViewController.swift */; };
+		919E79F02ADD7CCA00265963 /* SDKAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79EF2ADD7CCA00265963 /* SDKAPI.swift */; };
+		919E79F32ADD7CEE00265963 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 919E79F22ADD7CEE00265963 /* Bundle.swift */; };
+		91E46CE92ADE8796003AC5AD /* GeoIpUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E46CE82ADE8796003AC5AD /* GeoIpUrl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +57,20 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-AwesomeModuleExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AwesomeModuleExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AwesomeModuleExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-AwesomeModuleExample-AwesomeModuleExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeModuleExample-AwesomeModuleExampleTests.release.xcconfig"; path = "Target Support Files/Pods-AwesomeModuleExample-AwesomeModuleExampleTests/Pods-AwesomeModuleExample-AwesomeModuleExampleTests.release.xcconfig"; sourceTree = "<group>"; };
+		919E79CF2ADD419300265963 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		919E79D12ADD79B800265963 /* GeoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoModel.swift; sourceTree = "<group>"; };
+		919E79D42ADD7B5600265963 /* CampaignAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignAppModel.swift; sourceTree = "<group>"; };
+		919E79D72ADD7B9E00265963 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		919E79DA2ADD7BC600265963 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		919E79DB2ADD7BC600265963 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		919E79DC2ADD7BC600265963 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		919E79DD2ADD7BC600265963 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		919E79E32ADD7C2300265963 /* InsideAdHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideAdHelper.swift; sourceTree = "<group>"; };
+		919E79E42ADD7C2300265963 /* InsideAdPlayerInitialize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideAdPlayerInitialize.swift; sourceTree = "<group>"; };
+		919E79E82ADD7C7400265963 /* InsideAdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsideAdViewController.swift; sourceTree = "<group>"; };
+		919E79EF2ADD7CCA00265963 /* SDKAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKAPI.swift; sourceTree = "<group>"; };
+		919E79F22ADD7CEE00265963 /* Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
+		91E46CE82ADE8796003AC5AD /* GeoIpUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoIpUrl.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -86,7 +114,15 @@
 		13B07FAE1A68108700A75B9A /* AwesomeModuleExample */ = {
 			isa = PBXGroup;
 			children = (
+				919E79EE2ADD7CCA00265963 /* API */,
+				919E79E72ADD7C7400265963 /* Views */,
+				919E79E22ADD7C2300265963 /* ViewModel */,
+				919E79D32ADD7B3200265963 /* Model */,
+				919E79D92ADD7BB000265963 /* Utils */,
+				919E79D62ADD7B8700265963 /* Protocols */,
+				919E79F12ADD7CEE00265963 /* Extensions */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				919E79CF2ADD419300265963 /* ViewController.swift */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -135,6 +171,68 @@
 				00E356EE1AD99517003FC87E /* AwesomeModuleExampleTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		919E79D32ADD7B3200265963 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				919E79D12ADD79B800265963 /* GeoModel.swift */,
+				919E79D42ADD7B5600265963 /* CampaignAppModel.swift */,
+				91E46CE82ADE8796003AC5AD /* GeoIpUrl.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		919E79D62ADD7B8700265963 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				919E79D72ADD7B9E00265963 /* Protocols.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		919E79D92ADD7BB000265963 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				919E79DD2ADD7BC600265963 /* Constants.swift */,
+				919E79DA2ADD7BC600265963 /* LocationManager.swift */,
+				919E79DC2ADD7BC600265963 /* Logger.swift */,
+				919E79DB2ADD7BC600265963 /* Utils.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		919E79E22ADD7C2300265963 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				919E79E32ADD7C2300265963 /* InsideAdHelper.swift */,
+				919E79E42ADD7C2300265963 /* InsideAdPlayerInitialize.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		919E79E72ADD7C7400265963 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				919E79E82ADD7C7400265963 /* InsideAdViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		919E79EE2ADD7CCA00265963 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				919E79EF2ADD7CCA00265963 /* SDKAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		919E79F12ADD7CEE00265963 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				919E79F22ADD7CEE00265963 /* Bundle.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -207,12 +305,12 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1500;
 					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "AwesomeModuleExample" */;
-			compatibilityVersion = "Xcode 12.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -412,8 +510,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91E46CE92ADE8796003AC5AD /* GeoIpUrl.swift in Sources */,
+				919E79E52ADD7C2300265963 /* InsideAdHelper.swift in Sources */,
+				919E79D02ADD419300265963 /* ViewController.swift in Sources */,
+				919E79D52ADD7B5600265963 /* CampaignAppModel.swift in Sources */,
+				919E79F02ADD7CCA00265963 /* SDKAPI.swift in Sources */,
+				919E79D22ADD79B800265963 /* GeoModel.swift in Sources */,
+				919E79DE2ADD7BC600265963 /* LocationManager.swift in Sources */,
+				919E79E62ADD7C2300265963 /* InsideAdPlayerInitialize.swift in Sources */,
+				919E79E02ADD7BC600265963 /* Logger.swift in Sources */,
+				919E79E12ADD7BC600265963 /* Constants.swift in Sources */,
+				919E79D82ADD7B9E00265963 /* Protocols.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				919E79F32ADD7CEE00265963 /* Bundle.swift in Sources */,
+				919E79DF2ADD7BC600265963 /* Utils.swift in Sources */,
+				919E79EB2ADD7C7400265963 /* InsideAdViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +544,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-AwesomeModuleExample-AwesomeModuleExampleTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -459,6 +572,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-AwesomeModuleExample-AwesomeModuleExampleTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = AwesomeModuleExampleTests/Info.plist;
@@ -488,6 +602,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = AwesomeModuleExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -514,6 +629,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = AwesomeModuleExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -564,7 +680,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -572,6 +688,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -592,12 +709,23 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
+					"-Wl",
+					"-ld_classic",
+					"-Wl",
+					"-ld_classic",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -635,9 +763,13 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = "";
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					_LIBCPP_ENABLE_CXX17_REMOVED_UNARY_BINARY_FUNCTION,
+				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -655,12 +787,23 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = "$(inherited)";
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
 					"-DFOLLY_NO_CONFIG",
 					"-DFOLLY_MOBILE=1",
 					"-DFOLLY_USE_LIBCPP=1",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-Wl",
+					"-ld_classic",
+					"-Wl",
+					"-ld_classic",
+					"-Wl",
+					"-ld_classic",
+				);
+				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
