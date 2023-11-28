@@ -26,6 +26,7 @@ const InsideAdModule = NativeModules.InsideAdModule
 interface IinitializeSdkData {
   apiKey: string;
   baseUrl: string;
+  apiToken: string;
   appDomain?: string;
   siteUrl?: string;
   storeUrl?: string;
@@ -36,6 +37,7 @@ interface IinitializeSdkData {
 export function initializeSdk({
   apiKey,
   baseUrl,
+  apiToken,
   appDomain = '',
   descriptionUrl = '',
   siteUrl = '',
@@ -45,6 +47,7 @@ export function initializeSdk({
 }: IinitializeSdkData) {
   InsideAdModule.initializeSdk(
     apiKey,
+    apiToken,
     baseUrl,
     appDomain,
     descriptionUrl,
@@ -108,9 +111,7 @@ export const InsideAd = forwardRef(
       <InsideAdViewManager
         adEvents={(event: any) => adEvents(event)}
         style={{
-          // converts dpi to px, provide desired height
           height: insideAdHeight,
-          // converts dpi to px, provide desired width
           width: insideAdWidth,
         }}
         ref={ref}

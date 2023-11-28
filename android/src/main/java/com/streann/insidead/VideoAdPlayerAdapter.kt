@@ -4,6 +4,8 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
+import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.VideoView
 import com.google.ads.interactivemedia.v3.api.AdPodInfo
 import com.google.ads.interactivemedia.v3.api.player.AdMediaInfo
@@ -11,7 +13,11 @@ import com.google.ads.interactivemedia.v3.api.player.VideoAdPlayer
 import com.google.ads.interactivemedia.v3.api.player.VideoProgressUpdate
 import java.util.*
 
-class VideoAdPlayerAdapter(private val videoPlayer: VideoView, audioManager: AudioManager) :
+class VideoAdPlayerAdapter(
+  private val videoPlayer: VideoView,
+  videoPlayerVolumeButton: FrameLayout,
+  audioManager: AudioManager
+) :
   VideoAdPlayer {
   private val audioManager: AudioManager
   private val videoAdPlayerCallbacks: ArrayList<VideoAdPlayer.VideoAdPlayerCallback> = ArrayList()
@@ -21,8 +27,12 @@ class VideoAdPlayerAdapter(private val videoPlayer: VideoView, audioManager: Aud
   private var savedAdPosition = 0
   private var loadedAdMediaInfo: AdMediaInfo? = null
 
+  private var adSoundPlaying = true
+  private var videoPlayerVolumeButton: FrameLayout
+
   init {
     this.audioManager = audioManager
+    this.videoPlayerVolumeButton = videoPlayerVolumeButton
   }
 
   companion object {
@@ -88,6 +98,13 @@ class VideoAdPlayerAdapter(private val videoPlayer: VideoView, audioManager: Aud
     return true
   }
 
+  private fun notifyImaSdkAboutAdVolumeChanged(level: Int) {
+    Log.i(LOGTAG, "notifyImaSdkAboutAdVolumeChanged")
+    for (callback in videoAdPlayerCallbacks) {
+      callback.onVolumeChanged(loadedAdMediaInfo!!, level)
+    }
+  }
+
   private fun startAdTracking() {
     Log.i(LOGTAG, "startAdTracking")
     if (timer != null) {
@@ -125,31 +142,34 @@ class VideoAdPlayerAdapter(private val videoPlayer: VideoView, audioManager: Aud
   }
 
   override fun addCallback(videoAdPlayerCallback: VideoAdPlayer.VideoAdPlayerCallback) {
-    videoAdPlayerCallbacks.add(videoAdPlayerCallback);
+    videoAdPlayerCallbacks.add(videoAdPlayerCallback)
   }
 
   override fun loadAd(adMediaInfo: AdMediaInfo, adPodInfo: AdPodInfo) {
-    Log.i(LOGTAG, "loadAd");
-    loadedAdMediaInfo = adMediaInfo;
+    Log.i(LOGTAG, "loadAd")
+    loadedAdMediaInfo = adMediaInfo
     notifyImaSdkAboutAdLoaded()
   }
 
   override fun pauseAd(adMediaInfo: AdMediaInfo) {
-    Log.i(LOGTAG, "pauseAd");
-    savedAdPosition = videoPlayer.currentPosition;
-    stopAdTracking();
+    Log.i(LOGTAG, "pauseAd")
+    savedAdPosition = videoPlayer.currentPosition
+    stopAdTracking()
     notifyImaSdkAboutAdPaused()
   }
 
   override fun playAd(adMediaInfo: AdMediaInfo) {
-    Log.i(LOGTAG, "playAd");
+    Log.i(LOGTAG, "playAd")
     videoPlayer.setVideoURI(Uri.parse(adMediaInfo.url))
 
     videoPlayer.setOnPreparedListener { mediaPlayer: MediaPlayer ->
       adDuration = mediaPlayer.duration
+
       if (savedAdPosition > 0) {
         mediaPlayer.seekTo(savedAdPosition)
       }
+
+      setAdVolumeControl(mediaPlayer)
       mediaPlayer.start()
       startAdTracking()
       notifyImaSdkAboutAdStarted()
@@ -167,16 +187,51 @@ class VideoAdPlayerAdapter(private val videoPlayer: VideoView, audioManager: Aud
     }
   }
 
+  fun stopAdPlaying() {
+    Log.i(LOGTAG, "stopAdPlaying")
+    if (videoPlayer.isPlaying) {
+      stopAdTracking()
+      videoPlayer.stopPlayback()
+      notifyImaSdkAboutAdEnded()
+    }
+  }
+
   override fun release() {
   }
 
   override fun removeCallback(videoAdPlayerCallback: VideoAdPlayer.VideoAdPlayerCallback) {
-    videoAdPlayerCallbacks.remove(videoAdPlayerCallback);
+    videoAdPlayerCallbacks.remove(videoAdPlayerCallback)
   }
 
   override fun stopAd(adMediaInfo: AdMediaInfo) {
-    Log.i(LOGTAG, "stopAd");
-    stopAdTracking();
+    Log.i(LOGTAG, "stopAd")
+    stopAdTracking()
+  }
+
+  private fun setAdVolumeControl(mediaPlayer: MediaPlayer) {
+    adSoundPlaying = if (InsideAdSdk.isAdMuted == true) {
+      setAdSound(mediaPlayer, 0, R.drawable.ic_volume_off)
+      false
+    } else {
+      setAdSound(mediaPlayer, 1, R.drawable.ic_volume_up)
+      true
+    }
+
+    videoPlayerVolumeButton.setOnClickListener {
+      if (adSoundPlaying) {
+        setAdSound(mediaPlayer, 0, R.drawable.ic_volume_off)
+      } else {
+        setAdSound(mediaPlayer, 1, R.drawable.ic_volume_up)
+      }
+      adSoundPlaying = !adSoundPlaying
+    }
+  }
+
+  private fun setAdSound(mediaPlayer: MediaPlayer, sound: Int, soundIcon: Int) {
+    mediaPlayer.setVolume(sound.toFloat(), sound.toFloat())
+    videoPlayerVolumeButton.findViewById<ImageView>(R.id.adVolumeIcon)
+      .setImageResource(soundIcon)
+    notifyImaSdkAboutAdVolumeChanged(sound)
   }
 
 }

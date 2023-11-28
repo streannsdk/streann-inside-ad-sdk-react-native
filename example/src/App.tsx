@@ -11,7 +11,7 @@ export default function App() {
   const insideAdRef = React.useRef<{ refreshAd: Function }>();
 
   React.useEffect(() => {
-    initializeSdk({ apiKey: 'ApiKey', baseUrl: 'BaseUrl' });
+    initializeSdk({ apiKey: '61290efae4b0304f3eb75567', apiToken:'babe0a4fcd3f42c1848bcf932e1e95ca833392dad9e9487ab7fb2af20ddffd81', baseUrl: 'https://inside-ads.services.c1.streann.com/' });
   }, []);
 
   const adEvents = (event: IinsideAdEvent) => {
@@ -27,8 +27,8 @@ export default function App() {
     <View style={styles.container}>
       <InsideAd
         ref={insideAdRef}
-        insideAdHeight={PixelRatio.getPixelSizeForLayoutSize(adHeight)}
-        insideAdWidth={PixelRatio.getPixelSizeForLayoutSize(adWidth)}
+        insideAdHeight={250}
+        insideAdWidth={320}
         insideAdEvents={adEvents}
       />
       <Button
