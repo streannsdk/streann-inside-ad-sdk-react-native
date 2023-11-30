@@ -105,7 +105,7 @@ class InsideAdReactNativeViewManager(
         val width = requireNotNull(propWidth)
         val height = requireNotNull(propHeight)
 
-//        view.setBackgroundColor(Color.parseColor("#00000000"))
+        // view.setBackgroundColor(Color.parseColor("#00000000"))
         view.measure(
             View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
             View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY))

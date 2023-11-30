@@ -1,8 +1,7 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { findNodeHandle } from 'react-native';
 import { UIManager } from 'react-native';
-import { NativeModules, Platform } from 'react-native';
-import { requireNativeComponent } from 'react-native';
+import { requireNativeComponent, NativeModules, Platform, PixelRatio, } from 'react-native';
 
 export const InsideAdViewManager: any = requireNativeComponent(
   'InsideAdViewManager'
@@ -111,8 +110,8 @@ export const InsideAd = forwardRef(
       <InsideAdViewManager
         adEvents={(event: any) => adEvents(event)}
         style={{
-          height: insideAdHeight,
-          width: insideAdWidth,
+          width: PixelRatio.getPixelSizeForLayoutSize(insideAdWidth),
+          height: PixelRatio.getPixelSizeForLayoutSize(insideAdHeight),
         }}
         ref={ref}
       />

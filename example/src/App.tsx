@@ -11,11 +11,16 @@ export default function App() {
   const insideAdRef = React.useRef<{ refreshAd: Function }>();
 
   React.useEffect(() => {
-    initializeSdk({ apiKey: '61290efae4b0304f3eb75567', apiToken:'babe0a4fcd3f42c1848bcf932e1e95ca833392dad9e9487ab7fb2af20ddffd81', baseUrl: 'https://inside-ads.services.c1.streann.com/' });
+    initializeSdk({
+      apiKey: '61290efae4b0304f3eb75567',
+      apiToken:
+        'babe0a4fcd3f42c1848bcf932e1e95ca833392dad9e9487ab7fb2af20ddffd81',
+      baseUrl: 'https://inside-ads.services.c1.streann.com/',
+    });
   }, []);
 
   const adEvents = (event: IinsideAdEvent) => {
-    console.log('adEvents', event.eventName);
+    console.log('adEvents', event.eventName, event.payload);
   };
   const refreshAd = () => {
     if (insideAdRef.current) insideAdRef.current.refreshAd();
@@ -27,8 +32,8 @@ export default function App() {
     <View style={styles.container}>
       <InsideAd
         ref={insideAdRef}
-        insideAdHeight={250}
-        insideAdWidth={320}
+        insideAdWidth={adWidth}
+        insideAdHeight={adHeight}
         insideAdEvents={adEvents}
       />
       <Button
