@@ -1,6 +1,6 @@
 import * as React from 'react';
-
-import { Button, Dimensions, PixelRatio, StyleSheet, View } from 'react-native';
+import { API_TOKEN, API_KEY, BASE_URL } from '@env'
+import { Button, Dimensions, StyleSheet, View } from 'react-native';
 import {
   initializeSdk,
   InsideAd,
@@ -12,11 +12,9 @@ export default function App() {
 
   React.useEffect(() => {
     initializeSdk({
-      apiKey: '61290efae4b0304f3eb75567',
-      apiToken:
-        'babe0a4fcd3f42c1848bcf932e1e95ca833392dad9e9487ab7fb2af20ddffd81',
-      baseUrl: 'https://inside-ads.services.c1.streann.com/',
-      
+      apiKey: API_KEY,
+      apiToken: API_TOKEN,
+      baseUrl: BASE_URL,
     });
   }, []);
 
