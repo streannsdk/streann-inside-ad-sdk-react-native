@@ -71,11 +71,12 @@ interface insideAdProps {
   insideAdWidth: number;
   insideAdHeight: number;
   insideAdScreen?: string;
+  insideAdIsMuted?: boolean;
 }
 
 export const InsideAd = forwardRef(
   (
-    { insideAdEvents, insideAdWidth, insideAdHeight, insideAdScreen = 'test' }: insideAdProps,
+    { insideAdEvents, insideAdWidth, insideAdHeight, insideAdScreen = '', insideAdIsMuted = false }: insideAdProps,
     parRef
   ) => {
     const ref = React.useRef(null);
@@ -111,6 +112,7 @@ export const InsideAd = forwardRef(
       <InsideAdViewManager
         adEvents={(event: any) => adEvents(event)}
         screen = {insideAdScreen}
+        isAdMuted = {insideAdIsMuted}
         style={{
           width: PixelRatio.getPixelSizeForLayoutSize(insideAdWidth),
           height: PixelRatio.getPixelSizeForLayoutSize(insideAdHeight),

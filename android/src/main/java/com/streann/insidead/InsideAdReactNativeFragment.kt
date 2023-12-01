@@ -12,11 +12,12 @@ import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
 import com.streann.insidead.models.InsideAd
 
-class InsideAdReactNativeFragment(reactContext: ReactContext, screen: String) : Fragment() {
+class InsideAdReactNativeFragment(reactContext: ReactContext, screen: String, propIsAdMuted: Boolean) : Fragment() {
     private val TAG = "InsideAdStreann"
     private lateinit var insideAdView: InsideAdView;
     private val reactContext1:ReactContext
     private val screenAd = screen
+    private  val isAdMuted = propIsAdMuted
     init {
       reactContext1 = reactContext;
     }
@@ -57,7 +58,7 @@ class InsideAdReactNativeFragment(reactContext: ReactContext, screen: String) : 
     }
 
     private fun setupInsideAdView() {
-        insideAdView.requestAd(screenAd,
+        insideAdView.requestAd(screenAd, isAdMuted,
           insideAdCallback = object : InsideAdCallback {
 
           override fun insideAdReceived(insideAd: InsideAd) {

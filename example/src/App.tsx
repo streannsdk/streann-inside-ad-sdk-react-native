@@ -34,6 +34,8 @@ export default function App() {
         insideAdWidth={320}
         insideAdHeight={180}
         insideAdEvents={adEvents}
+        insideAdIsMuted = {true}
+        insideAdScreen= ''
       />
       <Button
         onPress={() => refreshAd()}

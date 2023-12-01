@@ -24,6 +24,7 @@ class InsideAdReactNativeViewManager(
     private var propWidth: Int? = null
     private var propHeight: Int? = null
     private var propScreen: String = "";
+    private var propIsAdMuted: Boolean = false
 
     /**
      * Return a FrameLayout which will later hold the Fragment
@@ -79,6 +80,12 @@ class InsideAdReactNativeViewManager(
         Log.d(TAG, "PROPS Screen: $value"  )
         propScreen = value
     }
+
+    @ReactProp(name = "isAdMuted")
+    fun setIsMuted(view: FrameLayout, value: Boolean){
+      Log.d(TAG, "PROPS isAdMuted: $value"  )
+      propIsAdMuted = value
+    }
     /**
      * Replace your React Native view with a custom fragment
      */
@@ -86,7 +93,7 @@ class InsideAdReactNativeViewManager(
         val parentView = root.findViewById<ViewGroup>(reactNativeViewId)
         setupLayout(parentView)
 
-        val myFragment = InsideAdReactNativeFragment(reactContext, propScreen)
+        val myFragment = InsideAdReactNativeFragment(reactContext, propScreen, propIsAdMuted)
         val activity = reactContext.currentActivity as FragmentActivity
         activity.supportFragmentManager
             .beginTransaction()
