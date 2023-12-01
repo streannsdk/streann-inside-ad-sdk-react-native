@@ -89,6 +89,7 @@ class InsideAdReactNativeFragment(reactContext: ReactContext, screen: String, pr
 
             override fun insideAdClicked() {
               Log.i(TAG, "insideAdClicked")
+              onReceiveNativeEvent("insideAdClicked")
             }
 
             override fun insideAdError(error: String) {
