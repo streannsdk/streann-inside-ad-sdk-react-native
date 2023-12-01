@@ -31,8 +31,8 @@ export default function App() {
     <View style={styles.container}>
       <InsideAd
         ref={insideAdRef}
-        insideAdWidth={320}
-        insideAdHeight={180}
+        insideAdWidth={adWidth}
+        insideAdHeight={adHeight}
         insideAdEvents={adEvents}
         insideAdIsMuted = {true}
         insideAdScreen= ''

@@ -62,6 +62,9 @@ export interface IinsideAdEvent {
     | 'insideAdLoaded'
     | 'insideAdPlay'
     | 'insideAdStop'
+    | 'insideAdSkipped'
+    | 'insideAdClicked'
+    | 'insideAdVolumeChanged'
     | 'insideAdError';
   payload: string;
 }
