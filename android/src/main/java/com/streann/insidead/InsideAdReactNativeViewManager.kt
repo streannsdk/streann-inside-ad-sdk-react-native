@@ -12,6 +12,7 @@ import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
+import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.uimanager.annotations.ReactPropGroup
 
 
@@ -22,6 +23,7 @@ class InsideAdReactNativeViewManager(
     override fun getName() = REACT_CLASS
     private var propWidth: Int? = null
     private var propHeight: Int? = null
+    private var propScreen: String = "";
 
     /**
      * Return a FrameLayout which will later hold the Fragment
@@ -72,6 +74,11 @@ class InsideAdReactNativeViewManager(
         if (index == 1) propHeight = value
     }
 
+    @ReactProp(name = "screen")
+    fun setScreen(view: FrameLayout, value: String){
+        Log.d(TAG, "PROPS Screen: $value"  )
+        propScreen = value
+    }
     /**
      * Replace your React Native view with a custom fragment
      */
@@ -79,7 +86,7 @@ class InsideAdReactNativeViewManager(
         val parentView = root.findViewById<ViewGroup>(reactNativeViewId)
         setupLayout(parentView)
 
-        val myFragment = InsideAdReactNativeFragment(reactContext)
+        val myFragment = InsideAdReactNativeFragment(reactContext, propScreen)
         val activity = reactContext.currentActivity as FragmentActivity
         activity.supportFragmentManager
             .beginTransaction()

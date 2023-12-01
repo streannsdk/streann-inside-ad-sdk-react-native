@@ -70,11 +70,12 @@ interface insideAdProps {
   insideAdEvents: Function;
   insideAdWidth: number;
   insideAdHeight: number;
+  insideAdScreen?: string;
 }
 
 export const InsideAd = forwardRef(
   (
-    { insideAdEvents, insideAdWidth, insideAdHeight }: insideAdProps,
+    { insideAdEvents, insideAdWidth, insideAdHeight, insideAdScreen = 'test' }: insideAdProps,
     parRef
   ) => {
     const ref = React.useRef(null);
@@ -109,6 +110,7 @@ export const InsideAd = forwardRef(
     return (
       <InsideAdViewManager
         adEvents={(event: any) => adEvents(event)}
+        screen = {insideAdScreen}
         style={{
           width: PixelRatio.getPixelSizeForLayoutSize(insideAdWidth),
           height: PixelRatio.getPixelSizeForLayoutSize(insideAdHeight),

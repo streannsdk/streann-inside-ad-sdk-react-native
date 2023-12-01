@@ -16,6 +16,7 @@ export default function App() {
       apiToken:
         'babe0a4fcd3f42c1848bcf932e1e95ca833392dad9e9487ab7fb2af20ddffd81',
       baseUrl: 'https://inside-ads.services.c1.streann.com/',
+      
     });
   }, []);
 
@@ -32,8 +33,8 @@ export default function App() {
     <View style={styles.container}>
       <InsideAd
         ref={insideAdRef}
-        insideAdWidth={adWidth}
-        insideAdHeight={adHeight}
+        insideAdWidth={320}
+        insideAdHeight={180}
         insideAdEvents={adEvents}
       />
       <Button
