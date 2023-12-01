@@ -1,6 +1,6 @@
 import * as React from 'react';
-
-import { Button, Dimensions, PixelRatio, StyleSheet, View } from 'react-native';
+import { API_TOKEN, API_KEY, BASE_URL } from '@env'
+import { Button, Dimensions, StyleSheet, View } from 'react-native';
 import {
   initializeSdk,
   InsideAd,
@@ -11,11 +11,15 @@ export default function App() {
   const insideAdRef = React.useRef<{ refreshAd: Function }>();
 
   React.useEffect(() => {
-    initializeSdk({ apiKey: 'ApiKey', baseUrl: 'BaseUrl' });
+    initializeSdk({
+      apiKey: API_KEY,
+      apiToken: API_TOKEN,
+      baseUrl: BASE_URL,
+    });
   }, []);
 
   const adEvents = (event: IinsideAdEvent) => {
-    console.log('adEvents', event.eventName);
+    console.log('adEvents', event.eventName, event.payload);
   };
   const refreshAd = () => {
     if (insideAdRef.current) insideAdRef.current.refreshAd();
@@ -27,9 +31,11 @@ export default function App() {
     <View style={styles.container}>
       <InsideAd
         ref={insideAdRef}
-        insideAdHeight={PixelRatio.getPixelSizeForLayoutSize(adHeight)}
-        insideAdWidth={PixelRatio.getPixelSizeForLayoutSize(adWidth)}
+        insideAdWidth={adWidth}
+        insideAdHeight={adHeight}
         insideAdEvents={adEvents}
+        insideAdIsMuted = {true}
+        insideAdScreen= ''
       />
       <Button
         onPress={() => refreshAd()}

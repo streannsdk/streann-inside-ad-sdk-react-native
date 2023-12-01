@@ -12,6 +12,7 @@ import com.facebook.react.bridge.ReadableArray
 import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
+import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.uimanager.annotations.ReactPropGroup
 
 
@@ -22,6 +23,8 @@ class InsideAdReactNativeViewManager(
     override fun getName() = REACT_CLASS
     private var propWidth: Int? = null
     private var propHeight: Int? = null
+    private var propScreen: String = "";
+    private var propIsAdMuted: Boolean = false
 
     /**
      * Return a FrameLayout which will later hold the Fragment
@@ -72,6 +75,17 @@ class InsideAdReactNativeViewManager(
         if (index == 1) propHeight = value
     }
 
+    @ReactProp(name = "screen")
+    fun setScreen(view: FrameLayout, value: String){
+        Log.d(TAG, "PROPS Screen: $value"  )
+        propScreen = value
+    }
+
+    @ReactProp(name = "isAdMuted")
+    fun setIsMuted(view: FrameLayout, value: Boolean){
+      Log.d(TAG, "PROPS isAdMuted: $value"  )
+      propIsAdMuted = value
+    }
     /**
      * Replace your React Native view with a custom fragment
      */
@@ -79,7 +93,7 @@ class InsideAdReactNativeViewManager(
         val parentView = root.findViewById<ViewGroup>(reactNativeViewId)
         setupLayout(parentView)
 
-        val myFragment = InsideAdReactNativeFragment(reactContext)
+        val myFragment = InsideAdReactNativeFragment(reactContext, propScreen, propIsAdMuted)
         val activity = reactContext.currentActivity as FragmentActivity
         activity.supportFragmentManager
             .beginTransaction()
@@ -105,7 +119,7 @@ class InsideAdReactNativeViewManager(
         val width = requireNotNull(propWidth)
         val height = requireNotNull(propHeight)
 
-//        view.setBackgroundColor(Color.parseColor("#00000000"))
+        // view.setBackgroundColor(Color.parseColor("#00000000"))
         view.measure(
             View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY),
             View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY))

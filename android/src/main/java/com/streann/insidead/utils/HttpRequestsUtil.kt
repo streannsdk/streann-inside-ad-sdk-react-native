@@ -31,6 +31,7 @@ object HttpRequestsUtil {
       val urlConnection = url.openConnection() as HttpURLConnection
       urlConnection.requestMethod = "GET"
       urlConnection.instanceFollowRedirects = true
+      urlConnection.setRequestProperty("Authorization", "ApiToken ${InsideAdSdk.apiToken}")
 
       val responseCode: Int = urlConnection.responseCode
       if (responseCode == HttpURLConnection.HTTP_OK) {
@@ -72,6 +73,7 @@ object HttpRequestsUtil {
       val urlConnection = url.openConnection() as HttpURLConnection
       urlConnection.requestMethod = "GET"
       urlConnection.instanceFollowRedirects = true
+
       val responseCode: Int = urlConnection.responseCode
       if (responseCode == HttpURLConnection.HTTP_OK) {
         try {
@@ -171,26 +173,23 @@ object HttpRequestsUtil {
   }
 
   fun getCampaign(
-    apiKey: String,
     countryCode: String,
     screen: String,
     campaignCallback: CampaignCallback
   ) {
     val url: URL
     var jsonObject: JSONObject? = null
+
     try {
       val urlParameters = "platform=ANDROID&country=" + countryCode +
-        "&r=" + apiKey + "&screen=" + screen
-
-      url = URL(
-        InsideAdSdk.baseUrl + "v1/campaigns/app"
-          + "?" + urlParameters
-      )
+        "&r=" + InsideAdSdk.apiKey + "&screen=" + screen
+      url = URL(InsideAdSdk.baseUrl + "v1/campaigns/app?" + urlParameters)
 
       val connection = url.openConnection() as HttpsURLConnection
       connection.requestMethod = "GET"
       connection.instanceFollowRedirects = true
       connection.useCaches = false
+      connection.setRequestProperty("Authorization", "ApiToken ${InsideAdSdk.apiToken}")
       connection.connect()
 
       if (connection.responseCode == HttpsURLConnection.HTTP_OK) {
@@ -199,8 +198,8 @@ object HttpRequestsUtil {
           val br = BufferedReader(
             InputStreamReader(connection.inputStream)
           )
-          val response = StringBuilder()
 
+          val response = StringBuilder()
           while (br.readLine().also { line = it } != null) {
             response.append(line)
           }
@@ -241,7 +240,7 @@ object HttpRequestsUtil {
 
     if (campaignCallback != null) {
       val campaign = Campaign(insideAd)
-      campaignCallback.onSuccess(campaign);
+      campaignCallback.onSuccess(campaign)
     }
   }
 
@@ -298,7 +297,7 @@ object HttpRequestsUtil {
       insideAd.adType = ""
     }
 
-    if (jsonObject.has("properties")) {
+    if (jsonObject.has("properties") && !jsonObject.isNull("properties")) {
       try {
         insideAd.properties = jsonObject.getJSONObject("properties")
       } catch (e: JSONException) {

@@ -1,8 +1,7 @@
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { findNodeHandle } from 'react-native';
 import { UIManager } from 'react-native';
-import { NativeModules, Platform } from 'react-native';
-import { requireNativeComponent } from 'react-native';
+import { requireNativeComponent, NativeModules, Platform, PixelRatio, } from 'react-native';
 
 export const InsideAdViewManager: any = requireNativeComponent(
   'InsideAdViewManager'
@@ -26,6 +25,7 @@ const InsideAdModule = NativeModules.InsideAdModule
 interface IinitializeSdkData {
   apiKey: string;
   baseUrl: string;
+  apiToken: string;
   appDomain?: string;
   siteUrl?: string;
   storeUrl?: string;
@@ -36,6 +36,7 @@ interface IinitializeSdkData {
 export function initializeSdk({
   apiKey,
   baseUrl,
+  apiToken,
   appDomain = '',
   descriptionUrl = '',
   siteUrl = '',
@@ -45,6 +46,7 @@ export function initializeSdk({
 }: IinitializeSdkData) {
   InsideAdModule.initializeSdk(
     apiKey,
+    apiToken,
     baseUrl,
     appDomain,
     descriptionUrl,
@@ -60,6 +62,9 @@ export interface IinsideAdEvent {
     | 'insideAdLoaded'
     | 'insideAdPlay'
     | 'insideAdStop'
+    | 'insideAdSkipped'
+    | 'insideAdClicked'
+    | 'insideAdVolumeChanged'
     | 'insideAdError';
   payload: string;
 }
@@ -68,11 +73,13 @@ interface insideAdProps {
   insideAdEvents: Function;
   insideAdWidth: number;
   insideAdHeight: number;
+  insideAdScreen?: string;
+  insideAdIsMuted?: boolean;
 }
 
 export const InsideAd = forwardRef(
   (
-    { insideAdEvents, insideAdWidth, insideAdHeight }: insideAdProps,
+    { insideAdEvents, insideAdWidth, insideAdHeight, insideAdScreen = '', insideAdIsMuted = false }: insideAdProps,
     parRef
   ) => {
     const ref = React.useRef(null);
@@ -107,11 +114,11 @@ export const InsideAd = forwardRef(
     return (
       <InsideAdViewManager
         adEvents={(event: any) => adEvents(event)}
+        screen = {insideAdScreen}
+        isAdMuted = {insideAdIsMuted}
         style={{
-          // converts dpi to px, provide desired height
-          height: insideAdHeight,
-          // converts dpi to px, provide desired width
-          width: insideAdWidth,
+          width: PixelRatio.getPixelSizeForLayoutSize(insideAdWidth),
+          height: PixelRatio.getPixelSizeForLayoutSize(insideAdHeight),
         }}
         ref={ref}
       />
