@@ -68,6 +68,7 @@ class InsideAdReactNativeFragment(reactContext: ReactContext, screen: String, pr
 
             override fun insideAdLoaded() {
                 Log.i(TAG, "insideAdLoaded: ")
+              insideAdView.playAd()
               onReceiveNativeEvent("insideAdLoaded")
             }
 
