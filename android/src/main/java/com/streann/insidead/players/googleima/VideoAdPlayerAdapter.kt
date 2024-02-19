@@ -1,6 +1,5 @@
 package com.streann.insidead.players.googleima
 
-import android.media.AudioManager
 import android.media.MediaPlayer
 import android.net.Uri
 import android.util.Log
@@ -17,11 +16,9 @@ import java.util.*
 
 class VideoAdPlayerAdapter(
     private val videoPlayer: VideoView,
-    videoPlayerVolumeButton: FrameLayout,
-    audioManager: AudioManager
+    videoPlayerVolumeButton: FrameLayout
 ) :
     VideoAdPlayer {
-    private val audioManager: AudioManager
     private val videoAdPlayerCallbacks: ArrayList<VideoAdPlayer.VideoAdPlayerCallback> = ArrayList()
     private var timer: Timer? = null
     private var adDuration = 0
@@ -33,7 +30,6 @@ class VideoAdPlayerAdapter(
     private var videoPlayerVolumeButton: FrameLayout
 
     init {
-        this.audioManager = audioManager
         this.videoPlayerVolumeButton = videoPlayerVolumeButton
     }
 
@@ -138,12 +134,11 @@ class VideoAdPlayerAdapter(
         return VideoProgressUpdate(adPosition, adDuration.toLong())
     }
 
-    override fun getVolume(): Int {
-        return (audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-                / audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC))
-    }
+  override fun getVolume(): Int {
+      return 0
+  }
 
-    override fun addCallback(videoAdPlayerCallback: VideoAdPlayer.VideoAdPlayerCallback) {
+  override fun addCallback(videoAdPlayerCallback: VideoAdPlayer.VideoAdPlayerCallback) {
         videoAdPlayerCallbacks.add(videoAdPlayerCallback)
     }
 
