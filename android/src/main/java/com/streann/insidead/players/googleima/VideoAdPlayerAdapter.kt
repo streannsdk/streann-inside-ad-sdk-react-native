@@ -1,6 +1,7 @@
 package com.streann.insidead.players.googleima
 
 import android.media.MediaPlayer
+import android.media.AudioManager
 import android.net.Uri
 import android.util.Log
 import android.widget.FrameLayout
@@ -157,6 +158,8 @@ class VideoAdPlayerAdapter(
 
     override fun playAd(adMediaInfo: AdMediaInfo) {
         Log.i(LOGTAG, "playAd")
+
+        videoPlayer.setAudioFocusRequest(AudioManager.AUDIOFOCUS_NONE)
         videoPlayer.setVideoURI(Uri.parse(adMediaInfo.url))
 
         videoPlayer.setOnPreparedListener { mediaPlayer: MediaPlayer ->
