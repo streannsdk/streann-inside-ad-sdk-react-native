@@ -90,7 +90,7 @@ import { initializeSdk, InsideAd } from 'streann-inside-ad-sdk-react-native';
         insideAdHeight={adHeight}
         // here we recive back the ads event
         insideAdEvents={adEvents}
-        // enter the screen where you wish to load the ad (ex. Login, Splash screen, etc.) (optional parameter, default value: '')
+        // enter the screen where you wish to load the ad (ex. Splash or Video Player) (optional parameter, default value: '')
         insideAdScreen=''
         //isAdMuted - choose if you want your ad to be muted or not (optional parameter, default value: false)
         insideAdIsMuted={true}

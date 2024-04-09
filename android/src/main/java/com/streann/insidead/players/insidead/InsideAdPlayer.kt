@@ -8,7 +8,10 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.SurfaceHolder
+import android.view.SurfaceView
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -147,6 +150,7 @@ class InsideAdPlayer constructor(
             mediaPlayer?.stop()
             stopLocalVideoAd()
         } else if (imageAdView.visibility == VISIBLE) {
+            removeView(adCloseButton)
             imageAdView.setImageBitmap(null)
             insideAdListener?.insideAdStop()
             insideAdStoppedCallback?.insideAdStopped()

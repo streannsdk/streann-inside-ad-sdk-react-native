@@ -35,7 +35,7 @@ export default function App() {
         insideAdHeight={adHeight}
         insideAdEvents={adEvents}
         insideAdIsMuted = {true}
-        insideAdScreen= ''
+        insideAdScreen= 'Splash'
       />
       <Button
         onPress={() => refreshAd()}
