@@ -1,4 +1,3 @@
-package com.streann.insidead
 
 import android.os.Bundle
 import android.util.Log
@@ -6,38 +5,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.streann.insidead.callbacks.InsideAdCallback
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import com.streann.insidead.InsideAdView
+import com.streann.insidead.callbacks.InsideAdCallback
 import com.streann.insidead.models.InsideAd
 
-class InsideAdReactNativeFragment(reactContext: ReactContext, screen: String, propIsAdMuted: Boolean) : Fragment() {
-    private val TAG = "InsideAdStreann"
-    private lateinit var insideAdView: InsideAdView;
-    private val reactContext1:ReactContext
-    private val screenAd = screen
-    private  val isAdMuted = propIsAdMuted
-    init {
-      reactContext1 = reactContext;
-    }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
-        insideAdView = InsideAdView(requireNotNull(context))
+class InsideAdReactNativeFragment : Fragment() {
 
-        return insideAdView
-    }
+  private val TAG = "InsideAdStreann"
+  private lateinit var insideAdView: InsideAdView
+  private lateinit var reactContext: ReactContext
+  private lateinit var screen: String
+  private var isAdMuted: Boolean = false
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        // do any logic that should happen in an `onCreate` method, e.g:
-        // customView.onCreate(savedInstanceState);
-      setupInsideAdView()
-    }
+  fun initialize(reactContext: ReactContext, screen: String, isAdMuted: Boolean) {
+    this.reactContext = reactContext
+    this.screen = screen
+    this.isAdMuted = isAdMuted
+  }
+
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    super.onCreateView(inflater, container, savedInstanceState)
+    insideAdView = InsideAdView(requireNotNull(context))
+    return insideAdView
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    setupInsideAdView()
+  }
 
     override fun onPause() {
         super.onPause()
@@ -58,7 +60,7 @@ class InsideAdReactNativeFragment(reactContext: ReactContext, screen: String, pr
     }
 
     private fun setupInsideAdView() {
-        insideAdView.requestAd(screenAd, isAdMuted,
+        insideAdView.requestAd(screen, isAdMuted,
           insideAdCallback = object : InsideAdCallback {
 
           override fun insideAdReceived(insideAd: InsideAd) {
@@ -104,11 +106,12 @@ class InsideAdReactNativeFragment(reactContext: ReactContext, screen: String, pr
             }
         })
     }
+
   fun onReceiveNativeEvent(eventName: String) {
     val event = Arguments.createMap().apply {
       putString("event", eventName)
     }
-    reactContext1
+    reactContext
       .getJSModule(RCTEventEmitter::class.java)
       .receiveEvent(id, "progress", event)
   }

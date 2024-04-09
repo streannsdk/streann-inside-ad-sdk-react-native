@@ -1,6 +1,6 @@
 package com.streann.insidead
 
-import android.graphics.Color
+import InsideAdReactNativeFragment
 import android.util.Log
 import android.view.Choreographer
 import android.view.View
@@ -14,7 +14,6 @@ import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.uimanager.annotations.ReactPropGroup
-
 
 class InsideAdReactNativeViewManager(
     private val reactContext: ReactApplicationContext
@@ -93,7 +92,8 @@ class InsideAdReactNativeViewManager(
         val parentView = root.findViewById<ViewGroup>(reactNativeViewId)
         setupLayout(parentView)
 
-        val myFragment = InsideAdReactNativeFragment(reactContext, propScreen, propIsAdMuted)
+        val myFragment = InsideAdReactNativeFragment()
+        myFragment.initialize(reactContext, propScreen, propIsAdMuted)
         val activity = reactContext.currentActivity as FragmentActivity
         activity.supportFragmentManager
             .beginTransaction()

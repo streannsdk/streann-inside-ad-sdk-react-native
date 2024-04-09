@@ -1,7 +1,9 @@
 package com.streann.insidead
 
 import android.util.Log
-import com.facebook.react.bridge.*
+import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
 
 class InsideAdModule(reactContext: ReactApplicationContext) :
   ReactContextBaseJavaModule(reactContext) {
@@ -23,7 +25,7 @@ class InsideAdModule(reactContext: ReactApplicationContext) :
     siteUrl: String? = "", storeUrl: String? = "", descriptionUrl: String? = "",
     userBirthYear: Int? = 0, userGender: String? = ""
   ) {
-    Log.i(LOGTAG, "initializeSdk: ")
+    Log.i(LOGTAG, "initializeSdk")
     InsideAdSdk.initializeSdk(
       apiKey, apiToken, baseUrl, appDomain, siteUrl, storeUrl, descriptionUrl, userBirthYear, userGender
     )
