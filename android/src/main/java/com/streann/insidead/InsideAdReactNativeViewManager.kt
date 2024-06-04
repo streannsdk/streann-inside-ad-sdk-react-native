@@ -89,15 +89,15 @@ class InsideAdReactNativeViewManager(
      * Replace your React Native view with a custom fragment
      */
     private fun createFragment(root: FrameLayout, reactNativeViewId: Int) {
-        val parentView = root.findViewById<ViewGroup>(reactNativeViewId)
-        setupLayout(parentView)
+        setupLayout(root)
 
         val myFragment = InsideAdReactNativeFragment()
         myFragment.initialize(reactContext, propScreen, propIsAdMuted)
+        
         val activity = reactContext.currentActivity as FragmentActivity
         activity.supportFragmentManager
             .beginTransaction()
-            .replace(reactNativeViewId, myFragment, reactNativeViewId.toString())
+            .replace(root.id, myFragment, reactNativeViewId.toString())
             .commit()
     }
 
