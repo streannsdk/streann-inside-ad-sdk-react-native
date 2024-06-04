@@ -7,6 +7,7 @@ Streann Inside Ad is an React native library that provides a simple way to integ
   - Seamless integration of VAST video ads into your React native.
   - Customizable ad display options.
   - Full compatibility with different video types, including MP4, m3u8, etc.
+  - Display image-based advertisements seamlessly within your app, enhancing visual appeal.
 
 
 ## Installation
