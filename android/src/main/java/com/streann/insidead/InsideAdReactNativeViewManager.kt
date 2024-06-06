@@ -88,6 +88,7 @@ class InsideAdReactNativeViewManager(
     /**
      * Replace your React Native view with a custom fragment
      */
+     
     private fun createFragment(root: FrameLayout?, reactNativeViewId: Int) {
     if (root == null) {
         Log.e(TAG, "createFragment: root FrameLayout is null")
