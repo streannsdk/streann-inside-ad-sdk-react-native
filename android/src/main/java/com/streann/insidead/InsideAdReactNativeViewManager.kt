@@ -88,18 +88,23 @@ class InsideAdReactNativeViewManager(
     /**
      * Replace your React Native view with a custom fragment
      */
-    private fun createFragment(root: FrameLayout, reactNativeViewId: Int) {
-        setupLayout(root)
-
-        val myFragment = InsideAdReactNativeFragment()
-        myFragment.initialize(reactContext, propScreen, propIsAdMuted)
-        
-        val activity = reactContext.currentActivity as FragmentActivity
-        activity.supportFragmentManager
-            .beginTransaction()
-            .replace(root.id, myFragment, reactNativeViewId.toString())
-            .commit()
+    private fun createFragment(root: FrameLayout?, reactNativeViewId: Int) {
+    if (root == null) {
+        Log.e(TAG, "createFragment: root FrameLayout is null")
+        return
     }
+    if (root.id == View.NO_ID) {
+        root.id = View.generateViewId()
+    }
+    setupLayout(root)
+    val myFragment = InsideAdReactNativeFragment()
+    myFragment.initialize(reactContext, propScreen, propIsAdMuted)
+    val activity = reactContext.currentActivity as FragmentActivity
+    activity.supportFragmentManager
+        .beginTransaction()
+        .replace(root.id, myFragment, reactNativeViewId.toString())
+        .commit()
+}
 
     private fun setupLayout(view: View) {
         Choreographer.getInstance().postFrameCallback(object: Choreographer.FrameCallback {
