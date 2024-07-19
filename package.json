@@ -1,6 +1,6 @@
 {
   "name": "streann-inside-ad-sdk-react-native",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Streann inside ad sdk for react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
